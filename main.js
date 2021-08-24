@@ -6,7 +6,7 @@ const options = {
   HEIGHT: 500,
   SHAPE: "round",
   COLOR: "#ffffff",
-  "LINE WEIGHT":5 ,
+  "LINE WEIGHT": 5,
 };
 let coord = { x: 0, y: 0 };
 board.width = options.WIDTH;
