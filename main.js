@@ -23,7 +23,7 @@ function start() {
   board.addEventListener("mousemove", draw);
 }
 function end() {
-    board.removeEventListener("mousemove", draw)
+  board.removeEventListener("mousemove", draw)
   console.log("End drawing");
 }
 board.addEventListener("mousedown", start);
