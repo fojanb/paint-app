@@ -6,14 +6,14 @@ const options = {
   HEIGHT: 500,
   SHAPE : "round",
   COLOR : "#ffffff",
+  "LINE WEIGHT" : 5,
 };
 let coord = { x: 0, y: 0 };
-
 board.width = options.WIDTH;
 board.height = options.HEIGHT;
 function draw(event) {
   boardCtx.beginPath();
-  boardCtx.lineWidth = 5;
+  boardCtx.lineWidth = options["LINE WEIGHT"];
   boardCtx.lineCap = options.SHAPE;
   boardCtx.strokeStyle = options.COLOR ;
   coord.x = event.clientX - board.offsetLeft;
