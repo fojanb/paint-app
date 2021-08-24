@@ -6,12 +6,14 @@ const options = {
   HEIGHT: 500,
 };
 let coord = { x: 0, y: 0 };
+const SHAPE = "round";
+
 board.width = options.WIDTH;
 board.height = options.HEIGHT;
 function draw(event) {
   boardCtx.beginPath();
   boardCtx.lineWidth = 5;
-  boardCtx.lineCap = "round";
+  boardCtx.lineCap = SHAPE;
   boardCtx.strokeStyle = "#ffffff";
   coord.x = event.clientX - board.offsetLeft;
   coord.y = event.clientY - board.offsetTop;
