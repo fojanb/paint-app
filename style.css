@@ -142,7 +142,7 @@ template {
 html {
   --grey: #e7e7e7;
   --gray: var(--grey);
-  --blue: #073958;
+  --blue: #1b4332;
   --pink: #d60087;
   --yellow: #ffc600;
   --black: #2e2e2e;
@@ -273,7 +273,7 @@ h6 {
 }
 
 .board {
-  background-color: #05140f;
+  background-color: #081c15;
   margin: 50px auto;
   text-align: center;
   cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>✍️</text></svg>")
