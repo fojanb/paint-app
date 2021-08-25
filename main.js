@@ -8,7 +8,7 @@ const options = {
   WIDTH: 900,
   HEIGHT: 500,
   SHAPE: "round",
-  COLOR: "#000",
+  COLOR: "#37017c",
   "LINE WEIGHT": 5,
 };
 
