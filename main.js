@@ -1,6 +1,8 @@
 const wrapper = document.querySelector(".wrapper");
 const board = document.querySelector(".board");
 const boardCtx = board.getContext("2d");
+boardCtx.canvas.width = window.innerWidth;
+boardCtx.canvas.height = window.innerHeight - 60;
 let isDrawing = false;
 const options = {
   WIDTH: 900,
@@ -9,11 +11,9 @@ const options = {
   COLOR: "#ffffff",
   "LINE WEIGHT": 5,
 };
-board.width = options.WIDTH;
-board.height = options.HEIGHT;
+
 
 function draw(event) {
-  boardCtx.beginPath();
   boardCtx.lineWidth = options["LINE WEIGHT"];
   boardCtx.lineCap = options.SHAPE;
   boardCtx.strokeStyle = options.COLOR;
@@ -30,7 +30,7 @@ function draw(event) {
   }
 }
 function start() {
-  isDrawing = true;
+  isDrawing = !isDrawing;
   board.addEventListener("mousemove", draw);
 }
 function end() {
