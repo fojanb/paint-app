@@ -8,7 +8,7 @@ const options = {
   WIDTH: 900,
   HEIGHT: 500,
   SHAPE: "round",
-  COLOR: "#ffffff",
+  COLOR: "#000",
   "LINE WEIGHT": 5,
 };
 
@@ -16,6 +16,7 @@ const options = {
 function draw(event) {
   boardCtx.lineWidth = options["LINE WEIGHT"];
   boardCtx.lineCap = options.SHAPE;
+  boardCtx.lineJoin = options.SHAPE;
   boardCtx.strokeStyle = options.COLOR;
   if (isDrawing) {
     boardCtx.lineTo(
