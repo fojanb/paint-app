@@ -2,7 +2,7 @@ const wrapper = document.querySelector(".wrapper");
 const board = document.querySelector(".board");
 const boardCtx = board.getContext("2d");
 boardCtx.canvas.width = window.innerWidth;
-boardCtx.canvas.height = window.innerHeight;
+boardCtx.canvas.height = window.innerHeight-40;
 let isDrawing = false;
 const options = {
   SHAPE: "round",
