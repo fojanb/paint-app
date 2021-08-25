@@ -30,8 +30,10 @@ function draw(event) {
     boardCtx.moveTo(event.clientX, event.clientY);
   }
 }
-function start() {
+function start(e) {
   isDrawing = !isDrawing;
+  boardCtx.moveTo(e.clientX, e.clientY);
+// boardCtx.beginPath();
   board.addEventListener("mousemove", draw);
 }
 function end() {
