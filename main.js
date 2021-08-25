@@ -11,13 +11,12 @@ const options = {
   COLOR: "#37017c",
   "LINE WEIGHT": 5,
 };
-
+boardCtx.lineWidth = options["LINE WEIGHT"];
+boardCtx.lineCap = options.SHAPE;
+boardCtx.lineJoin = options.SHAPE;
+boardCtx.strokeStyle = options.COLOR;
 
 function draw(event) {
-  boardCtx.lineWidth = options["LINE WEIGHT"];
-  boardCtx.lineCap = options.SHAPE;
-  boardCtx.lineJoin = options.SHAPE;
-  boardCtx.strokeStyle = options.COLOR;
   if (isDrawing) {
     boardCtx.lineTo(
       event.clientX - board.offsetLeft,
@@ -33,7 +32,7 @@ function draw(event) {
 function start(e) {
   isDrawing = !isDrawing;
   boardCtx.moveTo(e.clientX, e.clientY);
-// boardCtx.beginPath();
+  // boardCtx.beginPath();
   board.addEventListener("mousemove", draw);
 }
 function end() {
