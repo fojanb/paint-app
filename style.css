@@ -1,33 +1,20 @@
 body {
   margin: 0;
   background-color: #37017c;
+  color: aliceblue;
+  font-family: monospace;
+  font-weight: bolder;
 }
 .main {
   margin: 0 auto;
   text-align: center;
 }
-
 .board {
   background-color: #ddd;
   margin-bottom: 5px;
   border-bottom: 1px solid black;
 }
-/* .tools {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  text-align: center;
-  color: aliceblue;
-}
-.tool {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  text-align: center;
-}
-.tool > button {
-  margin: 10px;
-} */
-table{
+
+table {
   width: 100%;
 }
