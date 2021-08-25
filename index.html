@@ -3,13 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no"
+    />
     <link rel="stylesheet" href="./style.css" />
     <title>Castofly</title>
   </head>
   <body>
     <div class="main">
       <canvas class="board"></canvas>
+      <div class="tools">
+        <div class="tool">
+          <label for="colorChange">Color</label>
+          <input type="color" id="colorChange" />
+        </div>
+        <div class="tool">
+          <label for="lineWidthChange">Line width</label>
+          <input type="range" id="lineWidthChange" min="1" max="10" step="1" />
+        </div>
+        <div class="tool">
+          <button id="save">Save</button>
+          <button id="clear">clear</button>
+        </div>
+      </div>
     </div>
     <script src="main.js"></script>
   </body>
