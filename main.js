@@ -37,6 +37,7 @@ function start(e) {
   board.addEventListener("mousemove", draw);
 }
 function end() {
+  isDrawing = !isDrawing;
   board.removeEventListener("mousemove", draw);
 }
 board.addEventListener("mousedown", start);
