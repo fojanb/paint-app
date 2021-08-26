@@ -56,24 +56,24 @@ navigator.mediaDevices
     } else {
       audio.src = window.URL.createObjectURL(mediaStreamObj);
     }
-    audio.onloadedmetadata = function (ev) {
+    audio.onloadedmetadata = function (event) {
       audio.play();
     };
     let start = document.getElementById("btnStart");
     let stop = document.getElementById("btnStop");
     let playAudio = document.getElementById("adioPlay");
     let mediaRecorder = new MediaRecorder(mediaStreamObj);
-    start.addEventListener("click", function (ev) {
+    start.addEventListener("click", function (event) {
       mediaRecorder.start();
     });
-    stop.addEventListener("click", function (ev) {
+    stop.addEventListener("click", function (event) {
       mediaRecorder.stop();
     });
-    mediaRecorder.ondataavailable = function (ev) {
+    mediaRecorder.ondataavailable = function (event) {
       dataArray.push(ev.data);
     };
     let dataArray = [];
-    mediaRecorder.onstop = function (ev) {
+    mediaRecorder.onstop = function (event) {
       let audioData = new Blob(dataArray, { type: "audio/mp3;" });
       dataArray = [];
       let audioSrc = window.URL.createObjectURL(audioData);
