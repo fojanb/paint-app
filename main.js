@@ -25,13 +25,13 @@ function draw(event) {
     boardCtx.moveTo(event.clientX, event.clientY);
   }
 }
-function start(e) {
+function startDraw(e) {
   isDrawing = !isDrawing;
   boardCtx.moveTo(e.clientX, e.clientY);
   // boardCtx.beginPath();
   board.addEventListener("mousemove", draw);
 }
-function end() {
+function endDraw() {
   isDrawing = !isDrawing;
   board.removeEventListener("mousemove", draw);
 }
@@ -41,8 +41,8 @@ function clearCanvas() {
 function saveCanvas(){
   
 }
-board.addEventListener("mousedown", start);
-board.addEventListener("mouseup", end);
+board.addEventListener("mousedown", startDraw);
+board.addEventListener("mouseup", endDraw);
 clear.addEventListener("click", clearCanvas);
 
 // Audio section--------->
@@ -70,7 +70,7 @@ navigator.mediaDevices
       mediaRecorder.stop();
     });
     mediaRecorder.ondataavailable = function (event) {
-      dataArray.push(ev.data);
+      dataArray.push(event.data);
     };
     let dataArray = [];
     mediaRecorder.onstop = function (event) {
