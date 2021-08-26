@@ -6,7 +6,7 @@ boardCtx.canvas.height = window.innerHeight-40;
 let isDrawing = false;
 const options = {
   SHAPE: "round",
-  COLOR: "#37017c",
+  COLOR: "#fff",
   "LINE WEIGHT": 5,
 };
 boardCtx.lineWidth = options["LINE WEIGHT"];
