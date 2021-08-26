@@ -36,7 +36,10 @@ function end() {
   board.removeEventListener("mousemove", draw);
 }
 function clearCanvas() {
-  boardCtx.clearRect(0, 0, board.width, board.height);
+  boardCtx.clearRect(0, 0, boardCtx.canvas.width, boardCtx.canvas.height);
+}
+function saveCanvas(){
+  
 }
 board.addEventListener("mousedown", start);
 board.addEventListener("mouseup", end);
