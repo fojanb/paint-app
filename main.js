@@ -5,6 +5,7 @@ const widthScale = document.querySelector("#lineWidth");
 const saveButton = document.querySelector("#btnSave");
 const clearButton = document.querySelector("#btnClear");
 const backButton = document.querySelector("#btnBack");
+const eraserButton = document.querySelector("#btnEraser")
 ctx.canvas.width = window.innerWidth;
 ctx.canvas.height = window.innerHeight - 80;
 let isDrawing = false;
@@ -107,3 +108,14 @@ colorPalette.addEventListener("change", () => {
   ctx.strokeStyle = colorPalette.value;
   ctx.beginPath(); // clear existing drawing paths
 });
+// >>>------------> Eraser Button <------------<<<
+eraserButton.addEventListener("click",()=>{
+  canvas.style.cursor = "pointer";
+  ctx.strokeStyle = "#000";
+  ctx.lineWidth = 6;
+
+  ctx.beginPath(); // clear existing drawing paths
+
+
+})
+
