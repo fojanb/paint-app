@@ -1,12 +1,12 @@
-const board = document.querySelector(".board");
-const boardCtx = board.getContext("2d");
+const canvas = document.querySelector(".board");
+const ctx = canvas.getContext("2d");
 const colorPalette = document.querySelector("#colorChange");
 const widthScale = document.querySelector("#lineWidth");
 const saveButton = document.querySelector("#btnSave");
 const clearButton = document.querySelector("#btnClear");
 const backButton = document.querySelector("#btnBack");
-boardCtx.canvas.width = window.innerWidth;
-boardCtx.canvas.height = window.innerHeight - 40;
+ctx.canvas.width = window.innerWidth;
+ctx.canvas.height = window.innerHeight - 40;
 let isDrawing = false;
 const options = {
   SHAPE: "round",
@@ -15,45 +15,45 @@ const options = {
 };
 // ------------------------#
 // Canvas initializations
-boardCtx.lineWidth = options["LINE WEIGHT"];
-boardCtx.lineCap = options.SHAPE;
-boardCtx.lineJoin = options.SHAPE;
-boardCtx.strokeStyle = options.COLOR;
+ctx.lineWidth = options["LINE WEIGHT"];
+ctx.lineCap = options.SHAPE;
+ctx.lineJoin = options.SHAPE;
+ctx.strokeStyle = options.COLOR;
 // ------------------------#
 function draw(e) {
   if (isDrawing) {
-    boardCtx.lineTo(e.clientX - board.offsetLeft, e.clientY - board.offsetTop);
-    boardCtx.closePath();
-    boardCtx.stroke();
-    boardCtx.moveTo(e.clientX, e.clientY);
+    ctx.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+    ctx.closePath();
+    ctx.stroke();
+    ctx.moveTo(e.clientX, e.clientY);
   } else {
-    boardCtx.moveTo(e.clientX, e.clientY);
+    ctx.moveTo(e.clientX, e.clientY);
   }
 }
 function startDraw(e) {
   isDrawing = !isDrawing;
-  boardCtx.moveTo(e.clientX, e.clientY);
-  // boardCtx.beginPath();
-  board.addEventListener("mousemove", draw);
+  ctx.moveTo(e.clientX, e.clientY);
+  // ctx.beginPath();
+  canvas.addEventListener("mousemove", draw);
 }
 function endDraw() {
   isDrawing = !isDrawing;
-  board.removeEventListener("mousemove", draw);
+  canvas.removeEventListener("mousemove", draw);
 }
 function clearCanvas() {
-  boardCtx.clearRect(0, 0, board.width, board.height);
-  boardCtx.beginPath(); // clear existing drawing paths
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.beginPath(); // clear existing drawing paths
 }
 function manageBackBtn() {
-  board.style.display = "block";
+  canvas.style.display = "block";
   document.getElementById("saveArea").style.display = "none";
   document.getElementById("tools").style.display = "block";
 }
 function saveCanvas() {
   // smth
 }
-board.addEventListener("mousedown", startDraw);
-board.addEventListener("mouseup", endDraw);
+canvas.addEventListener("mousedown", startDraw);
+canvas.addEventListener("mouseup", endDraw);
 clearButton.addEventListener("click", clearCanvas, false);
 backButton.addEventListener("click", manageBackBtn);
 
@@ -97,11 +97,11 @@ navigator.mediaDevices
   });
 // >>>------------> Width Scale <------------<<<
 widthScale.addEventListener("change", () => {
-  boardCtx.lineWidth = widthScale.value;
-  boardCtx.beginPath(); // clear existing drawing paths
+  ctx.lineWidth = widthScale.value;
+  ctx.beginPath(); // clear existing drawing paths
 });
 // >>>------------> Color Palette <------------<<<
 colorPalette.addEventListener("change", () => {
-  boardCtx.strokeStyle = colorPalette.value;
-  boardCtx.beginPath(); // clear existing drawing paths
+  ctx.strokeStyle = colorPalette.value;
+  ctx.beginPath(); // clear existing drawing paths
 });
