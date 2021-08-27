@@ -13,10 +13,13 @@ const options = {
   COLOR: "#fff", //Default pen color
   "LINE WEIGHT": 5, //Default line width
 };
+// ------------------------#
+// Canvas initializations
 boardCtx.lineWidth = options["LINE WEIGHT"];
 boardCtx.lineCap = options.SHAPE;
 boardCtx.lineJoin = options.SHAPE;
 boardCtx.strokeStyle = options.COLOR;
+// ------------------------#
 
 function draw(e) {
   if (isDrawing) {
