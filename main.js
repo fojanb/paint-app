@@ -1,4 +1,3 @@
-const wrapper = document.querySelector(".wrapper");
 const board = document.querySelector(".board");
 const boardCtx = board.getContext("2d");
 const colorPalette = document.querySelector("#colorChange");
