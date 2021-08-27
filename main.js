@@ -3,14 +3,14 @@ const board = document.querySelector(".board");
 const boardCtx = board.getContext("2d");
 const clearButton = document.querySelector("#btnClear");
 const backButton = document.querySelector("#btnBack");
-const widthSlider = document.querySelector("#lineWidth");
+const widthScale = document.querySelector("#lineWidth");
 const colorPalette = document.querySelector("#colorChange");
 boardCtx.canvas.width = window.innerWidth;
 boardCtx.canvas.height = window.innerHeight - 40;
 let isDrawing = false;
 const options = {
   SHAPE: "round",
-  COLOR: "#fff",
+  COLOR: "#fff", //Default pen color
   "LINE WEIGHT": 5,
 };
 boardCtx.lineWidth = options["LINE WEIGHT"];
@@ -92,9 +92,9 @@ navigator.mediaDevices
   .catch(function (err) {
     console.log(err.name, err.message);
   });
-// >>>------------> Width Slider <------------<<<
-widthSlider.addEventListener("change", () => {
-  boardCtx.lineWidth = widthSlider.value;
+// >>>------------> Width Scale <------------<<<
+widthScale.addEventListener("change", () => {
+  boardCtx.lineWidth = widthScale.value;
 });
 // >>>------------> Color Palette <------------<<<
 colorPalette.addEventListener("change", () => {
