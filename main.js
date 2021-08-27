@@ -11,7 +11,7 @@ let isDrawing = false;
 const options = {
   SHAPE: "round",
   COLOR: "#fff", //Default pen color
-  "LINE WEIGHT": 5,
+  "LINE WEIGHT": 5, //Default line width
 };
 boardCtx.lineWidth = options["LINE WEIGHT"];
 boardCtx.lineCap = options.SHAPE;
@@ -41,7 +41,7 @@ function endDraw() {
 function clearCanvas() {
   boardCtx.clearRect(0, 0, boardCtx.canvas.width, boardCtx.canvas.height);
 }
-function manageBack() {
+function manageBackBtn() {
   board.style.display = "block";
   document.getElementById("saveArea").style.display = "none";
   document.getElementById("tools").style.display = "block";
@@ -52,7 +52,7 @@ function saveCanvas() {
 board.addEventListener("mousedown", startDraw);
 board.addEventListener("mouseup", endDraw);
 clearButton.addEventListener("click", clearCanvas);
-backButton.addEventListener("click", manageBack);
+backButton.addEventListener("click", manageBackBtn);
 
 // >>>------------> Audio Section <------------<<<
 let audioIN = { audio: true };
