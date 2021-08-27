@@ -6,7 +6,7 @@ const saveButton = document.querySelector("#btnSave");
 const clearButton = document.querySelector("#btnClear");
 const backButton = document.querySelector("#btnBack");
 ctx.canvas.width = window.innerWidth;
-ctx.canvas.height = window.innerHeight - 70;
+ctx.canvas.height = window.innerHeight - 80;
 let isDrawing = false;
 const options = {
   SHAPE: "round",
