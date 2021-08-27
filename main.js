@@ -39,7 +39,8 @@ function endDraw() {
   board.removeEventListener("mousemove", draw);
 }
 function clearCanvas() {
-  boardCtx.clearRect(0, 0, boardCtx.canvas.width, boardCtx.canvas.height);
+  boardCtx.clearRect(0, 0, board.width, board.height);
+  boardCtx.beginPath();
 }
 function manageBackBtn() {
   board.style.display = "block";
@@ -51,7 +52,7 @@ function saveCanvas() {
 }
 board.addEventListener("mousedown", startDraw);
 board.addEventListener("mouseup", endDraw);
-clearButton.addEventListener("click", clearCanvas);
+clearButton.addEventListener("click", clearCanvas, false);
 backButton.addEventListener("click", manageBackBtn);
 
 // >>>------------> Audio Section <------------<<<
