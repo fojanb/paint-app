@@ -6,7 +6,7 @@ const saveButton = document.querySelector("#btnSave");
 const clearButton = document.querySelector("#btnClear");
 const backButton = document.querySelector("#btnBack");
 ctx.canvas.width = window.innerWidth;
-ctx.canvas.height = window.innerHeight - 40;
+ctx.canvas.height = window.innerHeight - 60;
 let isDrawing = false;
 const options = {
   SHAPE: "round",
@@ -75,7 +75,7 @@ navigator.mediaDevices
     };
     let start = document.getElementById("btnStart");
     let stop = document.getElementById("btnStop");
-    let playAudio = document.getElementById("adioPlay");
+    let playAudio = document.getElementById("audioPlay");
     let mediaRecorder = new MediaRecorder(mediaStreamObj);
     start.addEventListener("click", () => {
       mediaRecorder.start();
