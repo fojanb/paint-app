@@ -15,14 +15,14 @@ boardCtx.lineCap = options.SHAPE;
 boardCtx.lineJoin = options.SHAPE;
 boardCtx.strokeStyle = options.COLOR;
 
-function draw(event) {
+function draw(e) {
   if (isDrawing) {
-    boardCtx.lineTo(event.clientX - board.offsetLeft, event.clientY - board.offsetTop);
+    boardCtx.lineTo(e.clientX - board.offsetLeft, e.clientY - board.offsetTop);
     boardCtx.closePath();
     boardCtx.stroke();
-    boardCtx.moveTo(event.clientX, event.clientY);
+    boardCtx.moveTo(e.clientX, e.clientY);
   } else {
-    boardCtx.moveTo(event.clientX, event.clientY);
+    boardCtx.moveTo(e.clientX, e.clientY);
   }
 }
 function startDraw(e) {
