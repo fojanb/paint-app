@@ -97,7 +97,6 @@ navigator.mediaDevices
 widthScale.addEventListener("change", () => {
   boardCtx.lineWidth = widthScale.value;
   boardCtx.beginPath(); // clear existing drawing paths
-
 });
 // >>>------------> Color Palette <------------<<<
 colorPalette.addEventListener("change", () => {
