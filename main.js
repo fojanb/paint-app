@@ -53,7 +53,7 @@ board.addEventListener("mouseup", endDraw);
 clearButton.addEventListener("click", clearCanvas);
 backButton.addEventListener("click", manageBack);
 
-// Audio section--------->
+// >>>------------> Audio section <------------<<<
 let audioIN = { audio: true };
 navigator.mediaDevices
   .getUserMedia(audioIN)
@@ -71,17 +71,17 @@ navigator.mediaDevices
     let stop = document.getElementById("btnStop");
     let playAudio = document.getElementById("adioPlay");
     let mediaRecorder = new MediaRecorder(mediaStreamObj);
-    start.addEventListener("click", function (e) {
+    start.addEventListener("click", function () {
       mediaRecorder.start();
     });
-    stop.addEventListener("click", function (e) {
+    stop.addEventListener("click", function () {
       mediaRecorder.stop();
     });
     mediaRecorder.ondataavailable = function (e) {
       dataArray.push(e.data);
     };
     let dataArray = [];
-    mediaRecorder.onstop = function (e) {
+    mediaRecorder.onstop = function () {
       let audioData = new Blob(dataArray, { type: "audio/mp3;" });
       dataArray = [];
       let audioSrc = window.URL.createObjectURL(audioData);
@@ -91,7 +91,7 @@ navigator.mediaDevices
   .catch(function (err) {
     console.log(err.name, err.message);
   });
-// Width slider--------->
+// >>>------------> Width slider <------------<<<
 widthSlider.addEventListener("change", () => {
   boardCtx.lineWidth = widthSlider.value;
 });
