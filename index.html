@@ -10,7 +10,7 @@
   <body>
     <div class="main">
       <canvas class="board"></canvas>
-      <div id="saveArea" style="display: none;">
+      <div id="saveArea" style="display: none">
         <img id="canvasImg" />
         <h4>Right Click to Save...</h4>
         <button id="btnBack">Back</button>
@@ -24,12 +24,14 @@
             </td>
             <td><button id="btnSave">Save</button><button id="btnClear">Clear</button></td>
             <td>
-              <p>
+              <p class="audioBtn">
                 <button id="btnStart">Record</button>
                 <button id="btnStop">Stop</button>
               </p>
+            </td>
+            <td>
               <audio controls></audio>
-              <audio id="adioPlay" controls></audio>
+              <audio id="audioPlay" controls></audio>
             </td>
           </tr>
         </table>
