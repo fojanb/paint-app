@@ -44,16 +44,16 @@ const clearCanvas = () => {
   // ctx.setTransform(1, 0, 0, 1, 0, 0);
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.beginPath(); // clear existing drawing paths
-}
+};
 const manageBackBtn = () => {
   canvas.style.display = "block";
   document.getElementById("saveArea").style.display = "none";
   document.getElementById("tools").style.display = "block";
-}
-const manageSaveBtn =()=> {
+};
+const manageSaveBtn = () => {
   document.getElementById("saveArea").style.display = "block";
   document.getElementById("tools").style.display = "none";
-}
+};
 canvas.addEventListener("mousedown", startDraw);
 canvas.addEventListener("mouseup", endDraw);
 clearButton.addEventListener("click", clearCanvas, false);
@@ -63,14 +63,14 @@ saveButton.addEventListener("click", manageSaveBtn);
 let audioIN = { audio: true };
 navigator.mediaDevices
   .getUserMedia(audioIN)
-  .then(function (mediaStreamObj) {
+  .then((mediaStreamObj) => {
     let audio = document.querySelector("audio");
     if ("srcObject" in audio) {
       audio.srcObject = mediaStreamObj;
     } else {
       audio.src = window.URL.createObjectURL(mediaStreamObj);
     }
-    audio.onloadedmetadata = function (event) {
+    audio.onloadedmetadata = function () {
       audio.play();
     };
     let start = document.getElementById("btnStart");
@@ -94,7 +94,7 @@ navigator.mediaDevices
       playAudio.src = audioSrc;
     };
   })
-  .catch(function (err) {
+  .catch((err) => {
     console.log(err.name, err.message);
   });
 // >>>------------> Width Scale <------------<<<
