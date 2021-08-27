@@ -63,17 +63,17 @@ navigator.mediaDevices
     let stop = document.getElementById("btnStop");
     let playAudio = document.getElementById("adioPlay");
     let mediaRecorder = new MediaRecorder(mediaStreamObj);
-    start.addEventListener("click", function (event) {
+    start.addEventListener("click", function (e) {
       mediaRecorder.start();
     });
-    stop.addEventListener("click", function (event) {
+    stop.addEventListener("click", function (e) {
       mediaRecorder.stop();
     });
-    mediaRecorder.ondataavailable = function (event) {
-      dataArray.push(event.data);
+    mediaRecorder.ondataavailable = function (e) {
+      dataArray.push(e.data);
     };
     let dataArray = [];
-    mediaRecorder.onstop = function (event) {
+    mediaRecorder.onstop = function (e) {
       let audioData = new Blob(dataArray, { type: "audio/mp3;" });
       dataArray = [];
       let audioSrc = window.URL.createObjectURL(audioData);
