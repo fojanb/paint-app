@@ -4,6 +4,7 @@ const boardCtx = board.getContext("2d");
 const clearButton = document.querySelector("#btnClear");
 const backButton = document.querySelector("#btnBack");
 const widthSlider = document.querySelector("#lineWidth");
+const colorPalette = document.querySelector("#colorChange");
 boardCtx.canvas.width = window.innerWidth;
 boardCtx.canvas.height = window.innerHeight - 40;
 let isDrawing = false;
@@ -53,7 +54,7 @@ board.addEventListener("mouseup", endDraw);
 clearButton.addEventListener("click", clearCanvas);
 backButton.addEventListener("click", manageBack);
 
-// >>>------------> Audio section <------------<<<
+// >>>------------> Audio Section <------------<<<
 let audioIN = { audio: true };
 navigator.mediaDevices
   .getUserMedia(audioIN)
@@ -91,7 +92,11 @@ navigator.mediaDevices
   .catch(function (err) {
     console.log(err.name, err.message);
   });
-// >>>------------> Width slider <------------<<<
+// >>>------------> Width Slider <------------<<<
 widthSlider.addEventListener("change", () => {
   boardCtx.lineWidth = widthSlider.value;
 });
+// >>>------------> Color Palette <------------<<<
+colorPalette.addEventListener("change", () => {
+  boardCtx.strokeStyle = colorPalette.value;
+})
