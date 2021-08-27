@@ -20,7 +20,7 @@ ctx.lineCap = options.SHAPE;
 ctx.lineJoin = options.SHAPE;
 ctx.strokeStyle = options.COLOR;
 // ------------------------#
-function draw(e) {
+const draw = (e) => {
   if (isDrawing) {
     ctx.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
     ctx.closePath();
@@ -29,28 +29,28 @@ function draw(e) {
   } else {
     ctx.moveTo(e.clientX, e.clientY);
   }
-}
-function startDraw(e) {
+};
+const startDraw = (e) => {
   isDrawing = !isDrawing;
   ctx.moveTo(e.clientX, e.clientY);
   // ctx.beginPath();
   canvas.addEventListener("mousemove", draw);
-}
-function endDraw() {
+};
+const endDraw = () => {
   isDrawing = !isDrawing;
   canvas.removeEventListener("mousemove", draw);
-}
-function clearCanvas() {
+};
+const clearCanvas = () => {
   // ctx.setTransform(1, 0, 0, 1, 0, 0);
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.beginPath(); // clear existing drawing paths
 }
-function manageBackBtn() {
+const manageBackBtn = () => {
   canvas.style.display = "block";
   document.getElementById("saveArea").style.display = "none";
   document.getElementById("tools").style.display = "block";
 }
-function manageSaveBtn() {
+const manageSaveBtn =()=> {
   document.getElementById("saveArea").style.display = "block";
   document.getElementById("tools").style.display = "none";
 }
