@@ -12,7 +12,7 @@ body {
 .board {
   background-color: rgb(0, 0, 0);
   margin-bottom: 5px;
-  border-bottom: 1px solid black;
+  border-bottom: 3px solid rgb(208, 197, 216);
   cursor: crosshair;
 }
 table {
