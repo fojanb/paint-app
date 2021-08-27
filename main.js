@@ -1,10 +1,11 @@
 const wrapper = document.querySelector(".wrapper");
 const board = document.querySelector(".board");
 const boardCtx = board.getContext("2d");
+const colorPalette = document.querySelector("#colorChange");
+const widthScale = document.querySelector("#lineWidth");
+const saveButton = document.querySelector("#btnSave");
 const clearButton = document.querySelector("#btnClear");
 const backButton = document.querySelector("#btnBack");
-const widthScale = document.querySelector("#lineWidth");
-const colorPalette = document.querySelector("#colorChange");
 boardCtx.canvas.width = window.innerWidth;
 boardCtx.canvas.height = window.innerHeight - 40;
 let isDrawing = false;
@@ -20,7 +21,6 @@ boardCtx.lineCap = options.SHAPE;
 boardCtx.lineJoin = options.SHAPE;
 boardCtx.strokeStyle = options.COLOR;
 // ------------------------#
-
 function draw(e) {
   if (isDrawing) {
     boardCtx.lineTo(e.clientX - board.offsetLeft, e.clientY - board.offsetTop);
@@ -105,5 +105,4 @@ widthScale.addEventListener("change", () => {
 colorPalette.addEventListener("change", () => {
   boardCtx.strokeStyle = colorPalette.value;
   boardCtx.beginPath(); // clear existing drawing paths
-
-})
+});
