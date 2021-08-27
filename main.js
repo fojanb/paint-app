@@ -40,7 +40,7 @@ function endDraw() {
 }
 function clearCanvas() {
   boardCtx.clearRect(0, 0, board.width, board.height);
-  boardCtx.beginPath();
+  boardCtx.beginPath(); // clear existing drawing paths
 }
 function manageBackBtn() {
   board.style.display = "block";
@@ -96,8 +96,12 @@ navigator.mediaDevices
 // >>>------------> Width Scale <------------<<<
 widthScale.addEventListener("change", () => {
   boardCtx.lineWidth = widthScale.value;
+  boardCtx.beginPath(); // clear existing drawing paths
+
 });
 // >>>------------> Color Palette <------------<<<
 colorPalette.addEventListener("change", () => {
   boardCtx.strokeStyle = colorPalette.value;
+  boardCtx.beginPath(); // clear existing drawing paths
+
 })
