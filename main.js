@@ -1,7 +1,9 @@
 const wrapper = document.querySelector(".wrapper");
 const board = document.querySelector(".board");
 const boardCtx = board.getContext("2d");
-const clear = document.querySelector("#btnClear");
+const clearButton = document.querySelector("#btnClear");
+const backButton = document.querySelector("#btnBack");
+const widthSlider = document.querySelector("#lineWidth");
 boardCtx.canvas.width = window.innerWidth;
 boardCtx.canvas.height = window.innerHeight - 40;
 let isDrawing = false;
@@ -38,12 +40,18 @@ function endDraw() {
 function clearCanvas() {
   boardCtx.clearRect(0, 0, boardCtx.canvas.width, boardCtx.canvas.height);
 }
-function saveCanvas(){
-  
+function manageBack() {
+  board.style.display = "block";
+  document.getElementById("saveArea").style.display = "none";
+  document.getElementById("tools").style.display = "block";
+}
+function saveCanvas() {
+  // smth
 }
 board.addEventListener("mousedown", startDraw);
 board.addEventListener("mouseup", endDraw);
-clear.addEventListener("click", clearCanvas);
+clearButton.addEventListener("click", clearCanvas);
+backButton.addEventListener("click", manageBack);
 
 // Audio section--------->
 let audioIN = { audio: true };
@@ -83,3 +91,7 @@ navigator.mediaDevices
   .catch(function (err) {
     console.log(err.name, err.message);
   });
+// Width slider--------->
+widthSlider.addEventListener("change", () => {
+  boardCtx.lineWidth = widthSlider.value;
+});
