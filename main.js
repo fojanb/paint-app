@@ -50,14 +50,15 @@ function manageBackBtn() {
   document.getElementById("saveArea").style.display = "none";
   document.getElementById("tools").style.display = "block";
 }
-function saveCanvas() {
-  // smth
+function manageSaveBtn() {
+  document.getElementById("saveArea").style.display = "block";
+  document.getElementById("tools").style.display = "none";
 }
 canvas.addEventListener("mousedown", startDraw);
 canvas.addEventListener("mouseup", endDraw);
 clearButton.addEventListener("click", clearCanvas, false);
 backButton.addEventListener("click", manageBackBtn);
-
+saveButton.addEventListener("click", manageSaveBtn);
 // >>>------------> Audio Section <------------<<<
 let audioIN = { audio: true };
 navigator.mediaDevices
