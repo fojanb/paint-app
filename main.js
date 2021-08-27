@@ -77,10 +77,10 @@ navigator.mediaDevices
     let stop = document.getElementById("btnStop");
     let playAudio = document.getElementById("adioPlay");
     let mediaRecorder = new MediaRecorder(mediaStreamObj);
-    start.addEventListener("click", function () {
+    start.addEventListener("click", () => {
       mediaRecorder.start();
     });
-    stop.addEventListener("click", function () {
+    stop.addEventListener("click", () => {
       mediaRecorder.stop();
     });
     mediaRecorder.ondataavailable = function (e) {
