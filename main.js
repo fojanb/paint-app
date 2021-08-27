@@ -11,7 +11,7 @@ let isDrawing = false;
 const options = {
   SHAPE: "round",
   COLOR: "#fff", //Default pen color
-  "LINE WEIGHT": 5, //Default line width
+  "LINE WEIGHT": 5, //Default line width (1 to 20)
 };
 // ------------------------#
 // Canvas initializations
@@ -41,6 +41,7 @@ function endDraw() {
   canvas.removeEventListener("mousemove", draw);
 }
 function clearCanvas() {
+  // ctx.setTransform(1, 0, 0, 1, 0, 0);
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.beginPath(); // clear existing drawing paths
 }
