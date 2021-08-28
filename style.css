@@ -4,6 +4,7 @@ body {
   color: aliceblue;
   font-family: monospace;
   font-weight: bolder;
+  background-image: linear-gradient(to right, #080014 0%, #3d1472 100%);
 }
 .main {
   margin: 0 auto;
@@ -20,7 +21,9 @@ table {
 }
 button {
   background: none;
-  border: 1px solid rgb(74, 46, 105);
+  appearance: none;
+  border: none;
+  outline: none;
   color: aliceblue;
   font-family: inherit;
   padding: 5px;
@@ -33,7 +36,7 @@ button:hover {
 }
 .eraserBtn{
   font-weight:bolder;
-  background-color: rgb(230, 215, 14);
+  background-color: rgb(74, 46, 105);
   color : rgb(74, 46, 105);
   cursor: url('eraser.png'), auto;
   padding: 8px;
