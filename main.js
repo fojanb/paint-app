@@ -12,7 +12,7 @@ let isDrawing = false;
 const options = {
   SHAPE: "round",
   COLOR: "#fff", //Default pen color
-  "LINE WEIGHT": 5, //Default line width (1 to 20)
+  "LINE WEIGHT": 3, //Default line width (1 to 20)
 };
 // ------------------------#
 // Canvas initializations
@@ -119,6 +119,8 @@ const startErase = () => {
   }
 };
 const endErase = () => {
+  eraserButton.addEventListener("click", erase);
+
 
 }
 
