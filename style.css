@@ -38,7 +38,5 @@ button:hover {
   background-color: rgb(74, 46, 105);
   color : rgb(74, 46, 105);
   cursor: url('./assets/eraser.png'), auto;
-  padding: 8px;
-  font-size: 15px;
 
 }
