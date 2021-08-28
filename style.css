@@ -36,6 +36,5 @@ button:hover {
 .eraserBtn {
   font-weight: bolder;
   background-color: rgb(74, 46, 105);
-  color: rgb(74, 46, 105);
   cursor: url("./assets/eraser.png"), auto;
 }
