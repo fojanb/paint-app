@@ -114,7 +114,7 @@ const startErase = () => {
   if (eraser) {
     canvas.style.cursor = "url('./assets/eraser.png'), auto";
     ctx.strokeStyle = "#080014";
-    ctx.lineWidth = (widthScale.value)*2;
+    ctx.lineWidth = widthScale.value * 2;
     ctx.beginPath();
   }
 };
