@@ -109,21 +109,21 @@ colorPalette.addEventListener("change", () => {
   ctx.beginPath(); // clear existing drawing paths
 });
 // >>>------------> Erase Button <------------<<<
-// let eraser = true;
-// const erase = () => {
-//   if (eraser) {
-//     canvas.style.cursor = "pointer";
-//     ctx.strokeStyle = "#000";
-//     ctx.lineWidth = 6;
-//     ctx.beginPath(); // clear existing drawing paths
-//   }
-// }
-// const startErase = () => {
-//   canvas.addEventListener("mousedown",erase);
-//   eraser = !eraser;
-//   console.log(eraser);
+let eraser = true;
+const erase = () => {
+  if (eraser) {
+    canvas.style.cursor = "pointer";
+    ctx.strokeStyle = "#000";
+    ctx.lineWidth = 6;
+    ctx.lineWidth = widthScale.value;
+    ctx.beginPath(); // clear existing drawing paths
+  }
+}
+const startErase = () => {
+  canvas.addEventListener("mousedown",erase);
+  
 
 
-// };
+};
 
-// eraserButton.addEventListener("click",startErase);
+eraserButton.addEventListener("click",startErase);
