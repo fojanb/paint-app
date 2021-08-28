@@ -119,14 +119,20 @@ const startErase = () => {
   }
 };
 const endErase = () => {
-  eraserButton.addEventListener("click", erase);
+  canvas.removeEventListener("mousedown", startErase);
+  eraserButton.classList.remove("eraserBtn");
+  canvas.style.cursor = "crosshair";
+  ctx.strokeStyle = options.COLOR;
+  ctx.lineWidth = (widthScale.value)/4;
+  ctx.beginPath();
+
 };
 
 const erase = () => {
-  eraserButton.classList.toggle("eraserBtn");
+  eraserButton.classList.add("eraserBtn");
   canvas.style.cursor = "url('./assets/eraser.png'), auto";
   canvas.addEventListener("mousedown", startErase);
-  canvas.addEventListener("mouseup", endErase);
+  eraserButton.addEventListener("click", endErase);
 };
 
 eraserButton.addEventListener("click", erase);
