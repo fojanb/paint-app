@@ -112,7 +112,7 @@ colorPalette.addEventListener("change", () => {
 let eraser = true;
 const startErase = () => {
   if (eraser) {
-    canvas.style.cursor = "url('eraser.png'), auto";
+    canvas.style.cursor = "url('./assets/eraser.png'), auto";
     ctx.strokeStyle = "#080014";
     ctx.lineWidth = widthScale.value;
     ctx.beginPath();
@@ -124,7 +124,7 @@ const endErase = () => {
 
 const erase = () => {
   eraserButton.classList.toggle("eraserBtn");
-  canvas.style.cursor = "url('eraser.png'), auto";
+  canvas.style.cursor = "url('./assets/eraser.png'), auto";
   canvas.addEventListener("mousedown", startErase);
   canvas.addEventListener("mouseup", endErase);
 };
