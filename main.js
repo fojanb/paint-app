@@ -110,20 +110,24 @@ colorPalette.addEventListener("change", () => {
 });
 // >>>------------> Erase Button <------------<<<
 let eraser = true;
-const erase = () => {
+const startErase = () => {
   if (eraser) {
     canvas.style.cursor = "pointer";
     ctx.strokeStyle = "#000";
-    ctx.lineWidth = 6;
     ctx.lineWidth = widthScale.value;
-    ctx.beginPath(); // clear existing drawing paths
+    ctx.beginPath();
   }
-}
-const startErase = () => {
-  canvas.addEventListener("mousedown",erase);
-  
+};
+const endErase = () => {
 
+}
+
+const erase = () => {
+  eraserButton.classList.toggle("eraserBtn");
+  canvas.style.cursor = "pointer";
+  canvas.addEventListener("mousedown", startErase);
+  canvas.addEventListener("mouseup", endErase);
 
 };
 
-eraserButton.addEventListener("click",startErase);
+eraserButton.addEventListener("click", erase);
