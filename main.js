@@ -110,29 +110,28 @@ colorPalette.addEventListener("change", () => {
 });
 // >>>------------> Erase Button <------------<<<
 let eraser = true;
-const startErase = () => {
-  if (eraser) {
-    canvas.style.cursor = "url('./assets/eraser.png'), auto";
-    ctx.strokeStyle = "#080014";
-    ctx.lineWidth = widthScale.value * 2;
-    ctx.beginPath();
-  }
-};
-const endErase = () => {
-  canvas.removeEventListener("mousedown", startErase);
-  eraserButton.classList.remove("eraserBtn");
-  canvas.style.cursor = "crosshair";
-  ctx.strokeStyle = options.COLOR;
-  ctx.lineWidth = (widthScale.value)/4;
-  ctx.beginPath();
-
-};
 
 const erase = () => {
   eraserButton.classList.add("eraserBtn");
   canvas.style.cursor = "url('./assets/eraser.png'), auto";
-  canvas.addEventListener("mousedown", startErase);
-  eraserButton.addEventListener("click", endErase);
+
+  if (eraser) {
+    canvas.addEventListener("mousedown", () => {
+      ctx.strokeStyle = "#080014";
+      ctx.lineWidth = widthScale.value * 2;
+      ctx.beginPath();
+    });
+  }else{
+    eraserButton.classList.remove("eraserBtn");
+    canvas.style.cursor = "crosshair";
+    ctx.strokeStyle = options.COLOR;
+    ctx.lineWidth = widthScale.value / 4;
+    ctx.beginPath();
+
+
+  }
+  eraser= !eraser;
+
 };
 
 eraserButton.addEventListener("click", erase);
