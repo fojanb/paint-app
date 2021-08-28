@@ -112,24 +112,21 @@ colorPalette.addEventListener("change", () => {
 let eraser = true;
 const startErase = () => {
   if (eraser) {
-    canvas.style.cursor = "pointer";
+    canvas.style.cursor = "url('eraser.png'), auto";
     ctx.strokeStyle = "#000";
-    ctx.lineWidth = widthScale.value;
+    ctx.lineWidth = widthScale.value + 1;
     ctx.beginPath();
   }
 };
 const endErase = () => {
   eraserButton.addEventListener("click", erase);
-
-
-}
+};
 
 const erase = () => {
   eraserButton.classList.toggle("eraserBtn");
-  canvas.style.cursor = "pointer";
+  canvas.style.cursor = "url('eraser.png'), auto";
   canvas.addEventListener("mousedown", startErase);
   canvas.addEventListener("mouseup", endErase);
-
 };
 
 eraserButton.addEventListener("click", erase);
