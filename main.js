@@ -11,15 +11,14 @@ ctx.canvas.height = window.innerHeight - 80;
 let isDrawing = false;
 const options = {
   SHAPE: "round",
-  COLOR: "#fff", //Default pen color
-  "LINE WEIGHT": 3, //Default line width (1 to 20)
 };
 // ------------------------#
 // Canvas initializations
-ctx.lineWidth = options["LINE WEIGHT"];
 ctx.lineCap = options.SHAPE;
 ctx.lineJoin = options.SHAPE;
-ctx.strokeStyle = options.COLOR;
+canvas.style.cursor = "crosshair";
+ctx.strokeStyle = colorPalette.value;
+ctx.lineWidth = widthScale.value;
 // ------------------------#
 const draw = (e) => {
   if (isDrawing) {
@@ -109,26 +108,27 @@ colorPalette.addEventListener("change", () => {
   ctx.beginPath(); // clear existing drawing paths
 });
 // >>>------------> Erase Button <------------<<<
-let eraser = true;
+let eraser = false;
+const color = colorPalette.value;
 
 const erase = () => {
   eraserButton.classList.add("eraserBtn");
-
-  if (eraser) {
+  const erasing = () => {
+    ctx.strokeStyle = "#080014";
+    ctx.lineWidth = widthScale.value * 2;
+    ctx.beginPath();
+  };
+  if (!eraser) {
     canvas.style.cursor = "url('./assets/eraser.png'), auto";
-    const erasing = () => {
-      ctx.strokeStyle = "#080014";
-      ctx.lineWidth = widthScale.value * 2;
-      ctx.beginPath();
-    };
     canvas.addEventListener("mousedown", erasing);
   } else {
-    eraserButton.classList.remove("eraserBtn");
     canvas.style.cursor = "crosshair";
-    ctx.strokeStyle = "#fff";
-    ctx.lineWidth = options["LINE WEIGHT"];
-
+    ctx.strokeStyle = color;
+   console.log(color)
+    eraserButton.classList.remove("eraserBtn");
     canvas.addEventListener("mousedown", startDraw);
+
+    canvas.removeEventListener("mousedown", erasing);
   }
   eraser = !eraser;
 };
