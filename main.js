@@ -6,8 +6,8 @@ const saveButton = document.querySelector("#btnSave");
 const clearButton = document.querySelector("#btnClear");
 const backButton = document.querySelector("#btnBack");
 const eraserButton = document.querySelector("#btnEraser");
-ctx.canvas.width = window.innerWidth;
-ctx.canvas.height = window.innerHeight - 80;
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight - 80;
 let isDrawing = false;
 const options = {
   SHAPE: "round",
