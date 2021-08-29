@@ -101,8 +101,8 @@ widthScale.addEventListener("change", () => {
   ctx.lineWidth = widthScale.value;
   ctx.beginPath(); // clear existing drawing paths
 });
-// >>>------------> Color Palette <------------<<<
-function erase() {
+// >>>------------> Color Palette /Erase Button <------------<<<
+const erase = () => {
   ctx.globalCompositeOperation = "destination-out";
 }
 eraserButton.addEventListener("click", erase);
@@ -112,8 +112,4 @@ colorPalette.addEventListener("change", () => {
   ctx.globalCompositeOperation = "destination-over";
   ctx.beginPath();
 });
-// >>>------------> Erase Button <------------<<<
-let eraser = false;
-const weight = widthScale.value;
-const color = ctx.strokeStyle;
-console.log(color);
+
