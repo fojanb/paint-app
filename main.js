@@ -109,8 +109,9 @@ colorPalette.addEventListener("change", () => {
 });
 // >>>------------> Erase Button <------------<<<
 let eraser = false;
-const color = colorPalette.value;
-
+const weight = widthScale.value;
+const color = ctx.strokeStyle;
+console.log(color);
 const erase = () => {
   eraserButton.classList.add("eraserBtn");
   const erasing = () => {
@@ -123,8 +124,9 @@ const erase = () => {
     canvas.addEventListener("mousedown", erasing);
   } else {
     canvas.style.cursor = "crosshair";
+    ctx.lineWidth = weight;
     ctx.strokeStyle = color;
-   console.log(color)
+    console.log(color);
     eraserButton.classList.remove("eraserBtn");
     canvas.addEventListener("mousedown", startDraw);
 
