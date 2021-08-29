@@ -121,17 +121,13 @@ const erase = () => {
       ctx.lineWidth = widthScale.value * 2;
       ctx.beginPath();
     });
-  }else{
+  } else {
     eraserButton.classList.remove("eraserBtn");
     canvas.style.cursor = "crosshair";
     ctx.strokeStyle = options.COLOR;
-    ctx.lineWidth = widthScale.value / 4;
-    ctx.beginPath();
-
-
+    canvas.addEventListener("mousedown", startDraw);
   }
-  eraser= !eraser;
-
+  eraser = !eraser;
 };
 
 eraserButton.addEventListener("click", erase);
