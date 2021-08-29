@@ -112,7 +112,7 @@ colorPalette.addEventListener("change", () => {
   ctx.beginPath();
 });
 // -------------------------------------------------
-let eraser = false; //Toggle variable
+let eraser = true; //Toggle variable
 const erase = () => {
   const erasing = () => {
     ctx.strokeStyle = "#080014";
@@ -120,15 +120,15 @@ const erase = () => {
     ctx.beginPath();
   };
   eraserButton.classList.add("eraserBtn");
-  if (!eraser) {
+  if (eraser && !isDrawing) {
     canvas.style.cursor = "url('./assets/eraser.png'),auto ";
     canvas.addEventListener("mousedown", erasing);
   } else {
     eraserButton.classList.remove("eraserBtn");
     canvas.removeEventListener("mousedown", erasing);
-    ctx.lineWidth = widthScale.value / 4;
+    ctx.lineWidth = widthScale.value;
     canvas.style.cursor = "crosshair";
-    // ctx.strokeStyle = "#fff";
+    ctx.strokeStyle = "#fff";
   }
   eraser = !eraser;
 };
