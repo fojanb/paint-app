@@ -111,7 +111,7 @@ colorPalette.addEventListener("change", () => {
 // >>>------------> Erase Button <------------<<<
 let eraser = true;
 
-const erase = (e) => {
+const erase = () => {
   eraserButton.classList.add("eraserBtn");
 
   if (eraser) {
@@ -123,9 +123,7 @@ const erase = (e) => {
     };
     canvas.addEventListener("mousedown", erasing);
   } else {
-    e.stopPropagation();
     eraserButton.classList.remove("eraserBtn");
-    canvas.removeEventListener("mousedown", erasing);
     canvas.style.cursor = "crosshair";
     ctx.strokeStyle = "#fff";
     canvas.addEventListener("mousedown", startDraw);
