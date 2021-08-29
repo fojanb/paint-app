@@ -126,6 +126,8 @@ const erase = () => {
     eraserButton.classList.remove("eraserBtn");
     canvas.style.cursor = "crosshair";
     ctx.strokeStyle = "#fff";
+    ctx.lineWidth = options["LINE WEIGHT"];
+
     canvas.addEventListener("mousedown", startDraw);
   }
   eraser = !eraser;
