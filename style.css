@@ -29,12 +29,10 @@ button {
   border-radius: 5px;
 }
 button:hover {
-  cursor: pointer;
   background-color: rgb(74, 46, 105);
   color: aliceblue;
 }
 .eraserBtn {
   font-weight: bolder;
   background-color: rgb(74, 46, 105);
-  cursor: url("./assets/eraser.png"), auto;
 }
