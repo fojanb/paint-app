@@ -13,7 +13,7 @@ body {
   background-color: #080014;
   margin-bottom: 5px;
   border-bottom: 2px solid rgb(74, 46, 105);
-  cursor: url("./assets/t");
+  cursor: url("./assets/tip.png"),auto;
 }
 table {
   width: 100%;
