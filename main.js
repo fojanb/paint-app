@@ -127,7 +127,6 @@ const erase = () => {
     canvas.addEventListener("mouseover", erasing);
   } else {
     ctx.strokeStyle = colorPalette.value;
-    console.log(ctx.strokeStyle);
     eraserButton.classList.remove("eraserBtn");
     canvas.removeEventListener("mouseover", erasing);
     ctx.lineWidth = widthScale.value;
