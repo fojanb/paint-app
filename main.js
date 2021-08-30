@@ -53,8 +53,8 @@ const manageSaveBtn = () => {
   document.getElementById("saveArea").style.display = "block";
   document.getElementById("tools").style.display = "none";
 };
-window.addEventListener("mousedown", startDraw);
-window.addEventListener("mouseup", endDraw);
+canvas.addEventListener("mousedown", startDraw);
+canvas.addEventListener("mouseup", endDraw);
 clearButton.addEventListener("click", clearCanvas, false);
 backButton.addEventListener("click", manageBackBtn);
 saveButton.addEventListener("click", manageSaveBtn);
@@ -114,9 +114,10 @@ colorPalette.addEventListener("change", () => {
 // >>>------------> Erase Button <------------<<<
 /*Pixel-based eraser (redraw)*/
 let eraser = true; //Toggle variable
+const color = "#080014"; 
 const erase = () => {
   const erasing = () => {
-    ctx.strokeStyle = "#080014";
+    ctx.strokeStyle = color;
     ctx.lineWidth = widthScale.value * 2;
     ctx.beginPath();
   };
@@ -125,11 +126,12 @@ const erase = () => {
     canvas.style.cursor = "url('./assets/eraser.png'),auto ";
     canvas.addEventListener("mouseover", erasing);
   } else {
+    ctx.strokeStyle = colorPalette.value;
+    console.log(ctx.strokeStyle);
     eraserButton.classList.remove("eraserBtn");
     canvas.removeEventListener("mouseover", erasing);
-    // ctx.lineWidth = widthScale.value;
+    ctx.lineWidth = widthScale.value;
     canvas.style.cursor = "crosshair";
-    // ctx.strokeStyle = colorPalette.value;
   }
   eraser = !eraser;
 };
