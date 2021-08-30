@@ -104,19 +104,12 @@ widthScale.addEventListener("change", () => {
   ctx.beginPath(); // clear existing drawing paths
 });
 // >>>------------> Color Palette <------------<<<
-// const erase = () => {
-//   ctx.globalCompositeOperation = "destination-out";
-// }
-// eraserButton.addEventListener("click", erase);
-
 colorPalette.addEventListener("change", () => {
   ctx.strokeStyle = colorPalette.value;
   ctx.globalCompositeOperation = "source-over";
   ctx.beginPath();
 });
 // >>>------------> Erase Button <------------<<<
-/*Pixel-based eraser (redraw)*/
-let eraser = true; //Toggle variable
-const color = "#080014"; 
+/*Pixel-based eraser (Recommended solution : globalCompositeOperation)*/ 
 const erase = () => (ctx.globalCompositeOperation = "destination-out");
 eraserButton.addEventListener("click", erase);
