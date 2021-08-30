@@ -23,12 +23,12 @@ ctx.lineWidth = widthScale.value;
 // Draw logic
 
 const startDrawing = (e) => {
-  isDrawing = true;
+  isDrawing = !isDrawing;
   ctx.beginPath();
   ctx.moveTo(e.clientX, e.clientY);
 };
 const stopDrawing = () => {
-  isDrawing = false;
+  isDrawing = !isDrawing;
 };
 const draw = (e) => {
   if (!isDrawing) return;
