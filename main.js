@@ -112,6 +112,7 @@ colorPalette.addEventListener("change", () => {
   ctx.beginPath();
 });
 // >>>------------> Erase Button <------------<<<
+/*Pixel-based eraser (redraw)*/
 let eraser = true; //Toggle variable
 const erase = () => {
   const erasing = () => {
@@ -126,9 +127,9 @@ const erase = () => {
   } else {
     eraserButton.classList.remove("eraserBtn");
     canvas.removeEventListener("mouseover", erasing);
-    ctx.lineWidth = widthScale.value;
+    // ctx.lineWidth = widthScale.value;
     canvas.style.cursor = "crosshair";
-    ctx.strokeStyle = colorPalette.value;
+    // ctx.strokeStyle = colorPalette.value;
   }
   eraser = !eraser;
 };
