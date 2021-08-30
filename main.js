@@ -112,7 +112,6 @@ widthScale.addEventListener("change", () => {
 colorPalette.addEventListener("change", () => {
   ctx.strokeStyle = colorPalette.value;
   ctx.globalCompositeOperation = "source-over";
-
   ctx.beginPath();
 });
 // >>>------------> Erase Button <------------<<<
@@ -120,6 +119,4 @@ colorPalette.addEventListener("change", () => {
 let eraser = true; //Toggle variable
 const color = "#080014"; 
 const erase = () => (ctx.globalCompositeOperation = "destination-out");
-
-
 eraserButton.addEventListener("click", erase);
