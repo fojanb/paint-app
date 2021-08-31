@@ -129,7 +129,7 @@ eraserButton.addEventListener("click", erase);
     let { x, y } = coordination.startPoint.pop();
     let { z, w } = coordination.endPoint.pop();
     let imgData = ctx.getImageData(x, y, 100, 100);
-    console.log(imgData);
+    // console.log(imgData);
     for (i = 0; i < imgData.data.length; i++) {
       imgData.data[i] = 0;
     }
