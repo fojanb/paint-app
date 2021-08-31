@@ -10,12 +10,13 @@ const undoButton = document.querySelector("#btnUndo");
 let isDrawing = false;
 const options = {
   SHAPE: "round",
-  CURSOR : "crosshair",
+  CURSOR: "crosshair",
 };
 let coordination = {
-  startPoint : [],
-  endPoint : [],
-}
+  startPoint: [],
+  endPoint: [],
+  index: [],
+};
 // ------------------------#
 // Canvas initializations
 canvas.width = window.innerWidth;
@@ -32,12 +33,14 @@ const startDrawing = (e) => {
   ctx.beginPath();
   ctx.moveTo(e.clientX, e.clientY);
   coordination.startPoint.push({ x: e.clientX, y: e.clientY });
-  console.log("Start point coordination : ",coordination.startPoint);
+  console.log("Start point coordination : ", coordination.startPoint);
+  // coordination.index.push(coordination.startPoint.indexOf({ x: e.clientX, y: e.clientY }));
 };
 const endDrawing = (e) => {
   isDrawing = !isDrawing;
   coordination.endPoint.push({ x: e.clientX, y: e.clientY });
-  console.log("End point coordination : ",coordination.endPoint);
+  console.log("End point coordination : ", coordination.endPoint);
+  // coordination.index.push(coordination.endPoint.indexOf({ x: e.clientX, y: e.clientY }));
 };
 const draw = (e) => {
   if (!isDrawing) return;
@@ -47,8 +50,8 @@ const draw = (e) => {
 const enterCanvas = (e) => {
   ctx.beginPath();
 };
-window.addEventListener("mousedown", startDrawing);
-window.addEventListener("mouseup", endDrawing);
+canvas.addEventListener("mousedown", startDrawing);
+canvas.addEventListener("mouseup", endDrawing);
 canvas.addEventListener("mousemove", draw);
 canvas.addEventListener("mouseover", enterCanvas);
 // ------------------------------------------------
@@ -124,9 +127,16 @@ eraserButton.addEventListener("click", erase);
 // >>>------------> Undo Button <------------<<<
 const activeUndo = () => {
   const undo = (e) => {
-    let imgData = ctx.getImageData(e.clientX, e.clientY, 100, 100);
-    console.log(imgData);
-    ctx.clearRect(imgData.width, imgData.height, e.clientX, e.clientY);
+    let { x, y } = coordination.endPoint.pop();
+    console.log(x,y)
+
+    // let imgData = ctx.getImageData(e.clientX, e.clientY, 100, 100);
+    // console.log(imgData);
+    // console.log(coordination.endPoint)
+    for (let i = 0; i < coordination.endPoint.length; i++) {
+      ctx.fillRect(x-100, y-100, 200, 200);
+
+    }
   };
   undoButton.addEventListener("click", undo);
 };
