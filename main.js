@@ -13,6 +13,7 @@ const options = {
   CURSOR: "crosshair",
 };
 // ------------------------#
+// undo and redo
 let savePath = [];
 let index = -1; //This line means savePath is empty for now
 // ------------------------#
