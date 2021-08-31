@@ -6,6 +6,7 @@ const saveButton = document.querySelector("#btnSave");
 const clearButton = document.querySelector("#btnClear");
 const backButton = document.querySelector("#btnBack");
 const eraserButton = document.querySelector("#btnEraser");
+const undoButton = document.querySelector("#btnUndo");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight - 80;
 let isDrawing = false;
@@ -110,6 +111,17 @@ colorPalette.addEventListener("change", () => {
   ctx.beginPath();
 });
 // >>>------------> Erase Button <------------<<<
-/*Pixel-based eraser (Recommended solution : globalCompositeOperation)*/ 
+/*Pixel-based eraser (Recommended solution : globalCompositeOperation)*/
 const erase = () => (ctx.globalCompositeOperation = "destination-out");
 eraserButton.addEventListener("click", erase);
+// >>>------------> Undo Button <------------<<<
+const activeUndo = () => {
+  const undo = (e) => {
+    let imgData = ctx.getImageData(e.clientX, e.clientY, 100, 100);
+    console.log(imgData);
+    ctx.clearRect(imgData.width, imgData.height, e.clientX, e.clientY);
+  };
+  undoButton.addEventListener("click", undo);
+};
+
+canvas.addEventListener("mouseup", activeUndo);
