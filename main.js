@@ -126,14 +126,15 @@ const erase = () => (ctx.globalCompositeOperation = "destination-out");
 eraserButton.addEventListener("click", erase);
 // >>>------------> Undo Button <------------<<<
   const undo = () => {
-    let { x, y } = coordination.startPoint.pop();
-    let { z, w } = coordination.endPoint.pop();
-    let imgData = ctx.getImageData(x, y, 100, 100);
-    // console.log(imgData);
-    for (i = 0; i < imgData.data.length; i++) {
-      imgData.data[i] = 0;
-    }
-    ctx.putImageData(imgData, z - 50, w - 50);
-  };
+    // let { x, y } = coordination.startPoint.pop();
+    // let { z, w } = coordination.endPoint.pop();
+    // let imgData = ctx.getImageData(x, y, 100, 100);
+    // // console.log(imgData);
+    // for (i = 0; i < imgData.data.length; i++) {
+    //   imgData.data[i] = 0;
+    // }
+    // ctx.putImageData(imgData, z - 50, w - 50);
+    ctx.globalCompositeOperation = "destination-in";
+};
   undoButton.addEventListener("click", undo);
 
