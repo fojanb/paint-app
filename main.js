@@ -34,7 +34,7 @@ const startDrawing = (e) => {
   coordination.startPoint.push({ x: e.clientX, y: e.clientY });
   console.log("Start point coordination : ",coordination.startPoint);
 };
-const stopDrawing = (e) => {
+const endDrawing = (e) => {
   isDrawing = !isDrawing;
   coordination.endPoint.push({ x: e.clientX, y: e.clientY });
   console.log("End point coordination : ",coordination.endPoint);
@@ -48,7 +48,7 @@ const enterCanvas = (e) => {
   ctx.beginPath();
 };
 window.addEventListener("mousedown", startDrawing);
-window.addEventListener("mouseup", stopDrawing);
+window.addEventListener("mouseup", endDrawing);
 canvas.addEventListener("mousemove", draw);
 canvas.addEventListener("mouseover", enterCanvas);
 // ------------------------------------------------
