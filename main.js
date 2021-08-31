@@ -38,7 +38,7 @@ const startDrawing = (e) => {
 };
 const endDrawing = (e) => {
   isDrawing = !isDrawing;
-  coordination.endPoint.push({ x: e.clientX, y: e.clientY });
+  coordination.endPoint.push({ z: e.clientX, w: e.clientY });
   console.log("End point coordination : ", coordination.endPoint);
   // coordination.index.push(coordination.endPoint.indexOf({ x: e.clientX, y: e.clientY }));
 };
@@ -125,20 +125,15 @@ colorPalette.addEventListener("change", () => {
 const erase = () => (ctx.globalCompositeOperation = "destination-out");
 eraserButton.addEventListener("click", erase);
 // >>>------------> Undo Button <------------<<<
-const activeUndo = () => {
-  const undo = (e) => {
-    let { x, y } = coordination.endPoint.pop();
-    console.log(x,y)
-
-    // let imgData = ctx.getImageData(e.clientX, e.clientY, 100, 100);
-    // console.log(imgData);
-    // console.log(coordination.endPoint)
-    for (let i = 0; i < coordination.endPoint.length; i++) {
-      ctx.fillRect(x-100, y-100, 200, 200);
-
+  const undo = () => {
+    let { x, y } = coordination.startPoint.pop();
+    let { z, w } = coordination.endPoint.pop();
+    let imgData = ctx.getImageData(x, y, 100, 100);
+    console.log(imgData);
+    for (i = 0; i < imgData.data.length; i++) {
+      imgData.data[i] = 0;
     }
+    ctx.putImageData(imgData, z - 50, w - 50);
   };
   undoButton.addEventListener("click", undo);
-};
 
-canvas.addEventListener("mouseup", activeUndo);
