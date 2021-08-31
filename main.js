@@ -17,7 +17,7 @@ const options = {
 // undo and redo
 let savePath = [];
 let index = -1; //This line means savePath is empty for now
-let poped;
+let poped = []; //Store the paths that are already out of savePath array
 // ------------------------#
 // Canvas initializations
 canvas.width = window.innerWidth;
@@ -128,7 +128,7 @@ const undo = () => {
   if (index <= 0) {
     clearCanvas();
   } else {
-    poped = savePath.pop();
+    poped.push(savePath.pop());
     index -= 1;
     ctx.putImageData(savePath[index], 0, 0);
   }
@@ -136,9 +136,12 @@ const undo = () => {
 undoButton.addEventListener("click", undo);
 // >>>------------> Redo Button <------------<<<
 const redo = () => {
-    savePath.push(poped);
+  if (poped.length == 0) {
+    return;
+  } else {
+    savePath.push(poped.pop());
     index += 1;
     ctx.putImageData(savePath[index], 0, 0);
-  
+  }
 };
 redoButton.addEventListener("click", redo);
