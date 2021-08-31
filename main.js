@@ -12,11 +12,6 @@ const options = {
   SHAPE: "round",
   CURSOR: "crosshair",
 };
-let coordination = {
-  startPoint: [],
-  endPoint: [],
-  index: [],
-};
 // ------------------------#
 let savePath = [];
 let index = -1; //This line means savePath is empty for now
@@ -35,17 +30,11 @@ const startDrawing = (e) => {
   isDrawing = !isDrawing;
   ctx.beginPath();
   ctx.moveTo(e.clientX, e.clientY);
-  coordination.startPoint.push({ x: e.clientX, y: e.clientY });
-  console.log("Start point coordination : ", coordination.startPoint);
-  // coordination.index.push(coordination.startPoint.indexOf({ x: e.clientX, y: e.clientY }));
 };
 const endDrawing = (e) => {
   isDrawing = !isDrawing;
   savePath.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
   index += 1;
-  console.log(savePath);
-  coordination.endPoint.push({ z: e.clientX, w: e.clientY });
-  console.log("End point coordination : ", coordination.endPoint);
 };
 const draw = (e) => {
   if (!isDrawing) return;
@@ -140,14 +129,5 @@ const undo = () => {
     index -= 1;
     ctx.putImageData(savePath[index], 0, 0);
   }
-
-  // let { x, y } = coordination.startPoint.pop();
-  // let { z, w } = coordination.endPoint.pop();
-  // let imgData = ctx.getImageData(x, y, 100, 100);
-  // // console.log(imgData);
-  // for (i = 0; i < imgData.data.length; i++) {
-  //   imgData.data[i] = 0;
-  // }
-  // ctx.putImageData(imgData, z - 50, w - 50);
 };
 undoButton.addEventListener("click", undo);
