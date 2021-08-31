@@ -7,6 +7,7 @@ const clearButton = document.querySelector("#btnClear");
 const backButton = document.querySelector("#btnBack");
 const eraserButton = document.querySelector("#btnEraser");
 const undoButton = document.querySelector("#btnUndo");
+const redoButton = document.querySelector("#btnRedo");
 let isDrawing = false;
 const options = {
   SHAPE: "round",
@@ -16,6 +17,7 @@ const options = {
 // undo and redo
 let savePath = [];
 let index = -1; //This line means savePath is empty for now
+let poped;
 // ------------------------#
 // Canvas initializations
 canvas.width = window.innerWidth;
@@ -126,9 +128,17 @@ const undo = () => {
   if (index <= 0) {
     clearCanvas();
   } else {
-    savePath.pop();
+    poped = savePath.pop();
     index -= 1;
     ctx.putImageData(savePath[index], 0, 0);
   }
 };
 undoButton.addEventListener("click", undo);
+// >>>------------> Redo Button <------------<<<
+const redo = () => {
+    savePath.push(poped);
+    index += 1;
+    ctx.putImageData(savePath[index], 0, 0);
+  
+};
+redoButton.addEventListener("click", redo);
