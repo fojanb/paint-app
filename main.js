@@ -7,29 +7,37 @@ const clearButton = document.querySelector("#btnClear");
 const backButton = document.querySelector("#btnBack");
 const eraserButton = document.querySelector("#btnEraser");
 const undoButton = document.querySelector("#btnUndo");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight - 80;
 let isDrawing = false;
 const options = {
   SHAPE: "round",
+  CURSOR : "crosshair",
 };
+let coordination = {
+  startPoint : [],
+  endPoint : [],
+}
 // ------------------------#
 // Canvas initializations
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight - 80;
 ctx.lineCap = options.SHAPE;
 ctx.lineJoin = options.SHAPE;
-canvas.style.cursor = "crosshair";
+canvas.style.cursor = options.CURSOR;
 ctx.strokeStyle = colorPalette.value;
 ctx.lineWidth = widthScale.value;
 // ------------------------#
 // Draw logic
-
 const startDrawing = (e) => {
   isDrawing = !isDrawing;
   ctx.beginPath();
   ctx.moveTo(e.clientX, e.clientY);
+  coordination.startPoint.push({ x: e.clientX, y: e.clientY });
+  console.log("Start point coordination : ",coordination.startPoint);
 };
-const stopDrawing = () => {
+const stopDrawing = (e) => {
   isDrawing = !isDrawing;
+  coordination.endPoint.push({ x: e.clientX, y: e.clientY });
+  console.log("End point coordination : ",coordination.endPoint);
 };
 const draw = (e) => {
   if (!isDrawing) return;
@@ -57,7 +65,6 @@ const manageSaveBtn = () => {
   document.getElementById("saveArea").style.display = "block";
   document.getElementById("tools").style.display = "none";
 };
-
 clearButton.addEventListener("click", clearCanvas, false);
 backButton.addEventListener("click", manageBackBtn);
 saveButton.addEventListener("click", manageSaveBtn);
