@@ -18,6 +18,9 @@ let coordination = {
   index: [],
 };
 // ------------------------#
+let savePath = [];
+let index = -1; //This line means savePath is empty for now
+// ------------------------#
 // Canvas initializations
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight - 80;
@@ -27,7 +30,7 @@ canvas.style.cursor = options.CURSOR;
 ctx.strokeStyle = colorPalette.value;
 ctx.lineWidth = widthScale.value;
 // ------------------------#
-// Draw logic
+// >>>------------> Draw Logic <------------<<<
 const startDrawing = (e) => {
   isDrawing = !isDrawing;
   ctx.beginPath();
@@ -38,9 +41,11 @@ const startDrawing = (e) => {
 };
 const endDrawing = (e) => {
   isDrawing = !isDrawing;
+  savePath.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
+  index += 1;
+  console.log(savePath);
   coordination.endPoint.push({ z: e.clientX, w: e.clientY });
   console.log("End point coordination : ", coordination.endPoint);
-  // coordination.index.push(coordination.endPoint.indexOf({ x: e.clientX, y: e.clientY }));
 };
 const draw = (e) => {
   if (!isDrawing) return;
@@ -58,6 +63,8 @@ canvas.addEventListener("mouseover", enterCanvas);
 const clearCanvas = () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.beginPath(); // clear existing drawing paths
+  savePath = [];
+  index = -1;
 };
 const manageBackBtn = () => {
   canvas.style.display = "block";
@@ -125,16 +132,22 @@ colorPalette.addEventListener("change", () => {
 const erase = () => (ctx.globalCompositeOperation = "destination-out");
 eraserButton.addEventListener("click", erase);
 // >>>------------> Undo Button <------------<<<
-  const undo = () => {
-    // let { x, y } = coordination.startPoint.pop();
-    // let { z, w } = coordination.endPoint.pop();
-    // let imgData = ctx.getImageData(x, y, 100, 100);
-    // // console.log(imgData);
-    // for (i = 0; i < imgData.data.length; i++) {
-    //   imgData.data[i] = 0;
-    // }
-    // ctx.putImageData(imgData, z - 50, w - 50);
-    ctx.globalCompositeOperation = "destination-in";
-};
-  undoButton.addEventListener("click", undo);
+const undo = () => {
+  if (index <= 0) {
+    clearCanvas();
+  } else {
+    savePath.pop();
+    index -= 1;
+    ctx.putImageData(savePath[index], 0, 0);
+  }
 
+  // let { x, y } = coordination.startPoint.pop();
+  // let { z, w } = coordination.endPoint.pop();
+  // let imgData = ctx.getImageData(x, y, 100, 100);
+  // // console.log(imgData);
+  // for (i = 0; i < imgData.data.length; i++) {
+  //   imgData.data[i] = 0;
+  // }
+  // ctx.putImageData(imgData, z - 50, w - 50);
+};
+undoButton.addEventListener("click", undo);
