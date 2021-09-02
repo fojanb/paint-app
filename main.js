@@ -9,7 +9,7 @@ const eraserButton = document.querySelector("#btnEraser");
 const undoButton = document.querySelector("#btnUndo");
 const redoButton = document.querySelector("#btnRedo");
 const audio = document.querySelector("audio");
-const mediaRecorder = new MediaRecorder();
+// const mediaRecorder = new MediaRecorder();
 
 const helper = {
   isDrawing: false,
