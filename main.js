@@ -13,8 +13,8 @@ const helper = {
   SHAPE: "round",
   CURSOR: "crosshair",
   savePath: [],
-  index: -1, 
-  popped: [], 
+  index: -1, //It means that savePath is empty for now.
+  popped: [], //Store the paths that are already out of savePath array.
 };
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight - 80;
@@ -49,7 +49,7 @@ canvas.addEventListener("mouseover", enterCanvas);
 // ------------------------------------------------
 const clearCanvas = () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.beginPath(); 
+  ctx.beginPath(); // clear existing drawing paths
   helper.savePath = [];
   helper.index = -1;
 };
@@ -106,15 +106,16 @@ navigator.mediaDevices
 // >>>------------> Width Scale <------------<<<
 widthScale.addEventListener("change", () => {
   ctx.lineWidth = widthScale.value;
-  ctx.beginPath(); 
+  ctx.beginPath(); // clear existing drawing paths
 });
 // >>>------------> Color Palette <------------<<<
 colorPalette.addEventListener("change", () => {
   ctx.strokeStyle = colorPalette.value;
   ctx.globalCompositeOperation = "source-over";
-  ctx.beginPath();
+  ctx.beginPath(); // clear existing drawing paths
 });
 // >>>------------> Erase Button <------------<<<
+/*Pixel-based eraser (Recommended solution : globalCompositeOperation)*/
 const erase = () => (ctx.globalCompositeOperation = "destination-out");
 eraserButton.addEventListener("click", erase);
 // >>>------------> Undo Button <------------<<<
