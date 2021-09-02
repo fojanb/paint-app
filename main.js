@@ -15,8 +15,12 @@ const helper = {
   savePath: [],
   index: -1, //It means that savePath is empty for now.
   popped: [], //Store the paths that are already out of savePath array.
-  offset : 80,
+  offset: 80,
 };
+const audioHelper = {
+  dataArray: [],
+};
+let audioIN = { audio: true };
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight - helper.offset;
 ctx.lineCap = helper.SHAPE;
@@ -67,7 +71,6 @@ clearButton.addEventListener("click", clearCanvas, false);
 backButton.addEventListener("click", manageBackBtn);
 saveButton.addEventListener("click", manageSaveBtn);
 // >>>------------> Audio Section <------------<<<
-let audioIN = { audio: true };
 navigator.mediaDevices
   .getUserMedia(audioIN)
   .then((mediaStreamObj) => {
@@ -91,12 +94,11 @@ navigator.mediaDevices
       mediaRecorder.stop();
     });
     mediaRecorder.ondataavailable = function (e) {
-      dataArray.push(e.data);
+      audioHelper.dataArray.push(e.data);
     };
-    let dataArray = [];
     mediaRecorder.onstop = function () {
-      let audioData = new Blob(dataArray, { type: "audio/mp3;" });
-      dataArray = [];
+      let audioData = new Blob(audioHelper.dataArray, { type: "audio/mp3;" });
+      audioHelper.dataArray = [];
       let audioSrc = window.URL.createObjectURL(audioData);
       playAudio.src = audioSrc;
     };
