@@ -8,39 +8,34 @@ const backButton = document.querySelector("#btnBack");
 const eraserButton = document.querySelector("#btnEraser");
 const undoButton = document.querySelector("#btnUndo");
 const redoButton = document.querySelector("#btnRedo");
-let isDrawing = false;
-const options = {
+const helper = {
+  isDrawing: false,
   SHAPE: "round",
   CURSOR: "crosshair",
+  savePath: [],
+  index: -1, 
+  popped: [], 
 };
-// ------------------------#
-// undo and redo
-let savePath = [];
-let index = -1; //This line means savePath is empty for now
-let poped = []; //Store the paths that are already out of savePath array
-// ------------------------#
-// Canvas initializations
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight - 80;
-ctx.lineCap = options.SHAPE;
-ctx.lineJoin = options.SHAPE;
-canvas.style.cursor = options.CURSOR;
+ctx.lineCap = helper.SHAPE;
+ctx.lineJoin = helper.SHAPE;
+canvas.style.cursor = helper.CURSOR;
 ctx.strokeStyle = colorPalette.value;
 ctx.lineWidth = widthScale.value;
-// ------------------------#
 // >>>------------> Draw Logic <------------<<<
 const startDrawing = (e) => {
-  isDrawing = !isDrawing;
+  helper.isDrawing = !helper.isDrawing;
   ctx.beginPath();
   ctx.moveTo(e.clientX, e.clientY);
 };
 const endDrawing = (e) => {
-  isDrawing = !isDrawing;
-  savePath.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
-  index += 1;
+  helper.isDrawing = !helper.isDrawing;
+  helper.savePath.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
+  helper.index += 1;
 };
 const draw = (e) => {
-  if (!isDrawing) return;
+  if (!helper.isDrawing) return;
   ctx.lineTo(e.clientX, e.clientY);
   ctx.stroke();
 };
@@ -54,9 +49,9 @@ canvas.addEventListener("mouseover", enterCanvas);
 // ------------------------------------------------
 const clearCanvas = () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.beginPath(); // clear existing drawing paths
-  savePath = [];
-  index = -1;
+  ctx.beginPath(); 
+  helper.savePath = [];
+  helper.index = -1;
 };
 const manageBackBtn = () => {
   canvas.style.display = "block";
@@ -111,7 +106,7 @@ navigator.mediaDevices
 // >>>------------> Width Scale <------------<<<
 widthScale.addEventListener("change", () => {
   ctx.lineWidth = widthScale.value;
-  ctx.beginPath(); // clear existing drawing paths
+  ctx.beginPath(); 
 });
 // >>>------------> Color Palette <------------<<<
 colorPalette.addEventListener("change", () => {
@@ -120,28 +115,27 @@ colorPalette.addEventListener("change", () => {
   ctx.beginPath();
 });
 // >>>------------> Erase Button <------------<<<
-/*Pixel-based eraser (Recommended solution : globalCompositeOperation)*/
 const erase = () => (ctx.globalCompositeOperation = "destination-out");
 eraserButton.addEventListener("click", erase);
 // >>>------------> Undo Button <------------<<<
 const undo = () => {
-  if (index <= 0) {
+  if (helper.index <= 0) {
     clearCanvas();
   } else {
-    poped.push(savePath.pop());
-    index -= 1;
-    ctx.putImageData(savePath[index], 0, 0);
+    helper.popped.push(helper.savePath.pop());
+    helper.index -= 1;
+    ctx.putImageData(helper.savePath[helper.index], 0, 0);
   }
 };
 undoButton.addEventListener("click", undo);
 // >>>------------> Redo Button <------------<<<
 const redo = () => {
-  if (poped.length == 0) {
+  if (helper.popped.length == 0) {
     return;
   } else {
-    savePath.push(poped.pop());
-    index += 1;
-    ctx.putImageData(savePath[index], 0, 0);
+    helper.savePath.push(helper.popped.pop());
+    helper.index += 1;
+    ctx.putImageData(helper.savePath[helper.index], 0, 0);
   }
 };
 redoButton.addEventListener("click", redo);
