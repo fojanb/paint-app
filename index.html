@@ -40,18 +40,13 @@
               </p>
             </td>
             <td>
-              <p class="audioBtn">
-                <button id="btnStart">
-                  <img src="./assets/voiceRecorder.png" width="20px" height="20px" alt="Start Voice Recording" />
-                </button>
-                <button id="btnStop">
-                  <img src="./assets/stopButton.png" width="20px" height="20px" alt="Stop Voice Recording" />
-                </button>
-              </p>
-            </td>
-            <td>
-              <audio controls></audio>
-              <audio id="audioPlay" controls></audio>
+              <section class="main-controls">
+                <canvas class="visualizer" height="60px" style ="background-color: rgb(93, 21, 160);"></canvas>
+                <div id="buttons">
+                  <button class="record">Record</button>
+                  <button class="stop">Stop</button>
+                </div>
+              </section>
             </td>
             <td>
               <img src="./assets/logo.png" width="60px" height="60px" />
