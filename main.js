@@ -9,7 +9,6 @@ const eraserButton = document.querySelector("#btnEraser");
 const undoButton = document.querySelector("#btnUndo");
 const redoButton = document.querySelector("#btnRedo");
 const audio = document.querySelector("audio");
-// const mediaRecorder = new MediaRecorder();
 
 const helper = {
   isDrawing: false,
@@ -18,7 +17,7 @@ const helper = {
   savePath: [],
   index: -1, //It means that savePath is empty for now.
   popped: [], //Store the paths that are already out of savePath array.
-  offset: 80,
+  offset: 110,
 };
 const audioHelper = {
   dataArray: [],
@@ -74,13 +73,12 @@ clearButton.addEventListener("click", clearCanvas, false);
 backButton.addEventListener("click", manageBackBtn);
 saveButton.addEventListener("click", manageSaveBtn);
 // >>>------------> Audio Section <------------<<<
-async function populateAudio() {
-  const stream = await navigator.mediaDevices.getUserMedia(audioIN);
-  audio.srcObject = stream;
-  await audio.play();
-  console.log(stream);
+navigator.mediaDevices.getUserMedia(audioIN).then((stream) => {
+  var mediaRecorder = new MediaRecorder(stream);
+console.log(mediaRecorder)
+});
 
-}
+
 // ------------------------------------------------
 // navigator.mediaDevices
 //   .getUserMedia(audioIN)
