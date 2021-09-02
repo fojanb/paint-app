@@ -21,7 +21,6 @@ const audioHelper = {
   dataArray: [],
 };
 let audioIN = { audio: true };
-
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight - helper.offset;
 ctx.lineCap = helper.SHAPE;
