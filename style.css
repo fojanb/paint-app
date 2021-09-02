@@ -10,10 +10,11 @@ body {
   text-align: center;
 }
 .board {
-  background-color: #080014;
+  background-image: linear-gradient(to right, #080014 0%, #3d1472 100%);
   margin-bottom: 5px;
   border-bottom: 2px solid rgb(74, 46, 105);
   cursor: crosshair;
+  
 }
 table {
   width: 100%;
