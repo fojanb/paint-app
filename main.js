@@ -15,9 +15,10 @@ const helper = {
   savePath: [],
   index: -1, //It means that savePath is empty for now.
   popped: [], //Store the paths that are already out of savePath array.
+  offset : 80,
 };
 canvas.width = window.innerWidth;
-canvas.height = window.innerHeight - 80;
+canvas.height = window.innerHeight - helper.offset;
 ctx.lineCap = helper.SHAPE;
 ctx.lineJoin = helper.SHAPE;
 canvas.style.cursor = helper.CURSOR;
