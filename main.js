@@ -132,10 +132,10 @@ function visualizer(mediaStreamObj) {
     const HEIGHT = signalCanvas.height;
     requestAnimationFrame(draw);
     analyser.getByteTimeDomainData(dataArray);
-    signalCanvasCtx.fillStyle = 'rgb(200, 200, 200)';
+    signalCanvasCtx.fillStyle = '#343a40';
     signalCanvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
     signalCanvasCtx.lineWidth = 2;
-    signalCanvasCtx.strokeStyle = 'rgb(0, 0, 0)';
+    signalCanvasCtx.strokeStyle = '#26e07f';
     signalCanvasCtx.beginPath();
     let sliceWidth = WIDTH * 1.0 / bufferLength;
     let x = 0;
