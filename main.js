@@ -89,7 +89,7 @@ navigator.mediaDevices
     }
     let mediaRecorder = new MediaRecorder(mediaStreamObj);
     start.addEventListener("click", () => {
-      audio.play();
+      // audio.play();
       mediaRecorder.start();
       start.classList.add("recording");
     });
