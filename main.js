@@ -8,6 +8,12 @@ const backButton = document.querySelector("#btnBack");
 const eraserButton = document.querySelector("#btnEraser");
 const undoButton = document.querySelector("#btnUndo");
 const redoButton = document.querySelector("#btnRedo");
+// Audio
+let start = document.getElementById("btnStart");
+let stop = document.getElementById("btnStop");
+let audio = document.querySelector("audio");
+let playAudio = document.getElementById("audioPlay");
+
 const helper = {
   isDrawing: false,
   SHAPE: "round",
@@ -74,33 +80,32 @@ saveButton.addEventListener("click", manageSaveBtn);
 navigator.mediaDevices
   .getUserMedia(audioIN)
   .then((mediaStreamObj) => {
-    let audio = document.querySelector("audio");
     if ("srcObject" in audio) {
       audio.srcObject = mediaStreamObj;
     } else {
       audio.src = window.URL.createObjectURL(mediaStreamObj);
     }
-    audio.onloadedmetadata = function () {
-      audio.play();
-    };
-    let start = document.getElementById("btnStart");
-    let stop = document.getElementById("btnStop");
-    let playAudio = document.getElementById("audioPlay");
+
     let mediaRecorder = new MediaRecorder(mediaStreamObj);
+
     start.addEventListener("click", () => {
+      audio.play();
       mediaRecorder.start();
     });
     stop.addEventListener("click", () => {
       mediaRecorder.stop();
     });
+
     mediaRecorder.ondataavailable = function (e) {
       audioHelper.dataArray.push(e.data);
+      // console.log(audioHelper.dataArray) this is a [Blob]
     };
     mediaRecorder.onstop = function () {
       let audioData = new Blob(audioHelper.dataArray, { type: "audio/mp3;" });
       audioHelper.dataArray = [];
       let audioSrc = window.URL.createObjectURL(audioData);
       playAudio.src = audioSrc;
+      
     };
   })
   .catch((err) => {
