@@ -1,22 +1,25 @@
 body {
-  margin: 0;
+  display: grid;
   color: aliceblue;
   font-family: monospace;
   font-weight: bolder;
   background-color: #212529;
 }
-.main {
+/* .main {
   margin: 0 auto;
   text-align: center;
-}
+} */
 .board {
   background-color: rgb(0, 0, 0);
   margin-bottom: 5px;
   border-bottom: 2px solid rgb(74, 46, 105);
   cursor: crosshair;
+  margin-left: 600px;
 }
 table {
-  width: 100%;
+  width: 60%;
+  margin: 0 auto;
+  margin-right: 0px;
 }
 button {
   background: none;
