@@ -12,9 +12,8 @@ const redoButton = document.querySelector("#btnRedo");
 let start = document.getElementById("btnStart");
 let stop = document.getElementById("btnStop");
 let audio = document.querySelector("audio");
-audio.controls = false;
-
 let playAudio = document.getElementById("audioPlay");
+audio.controls = false;
 
 const helper = {
   isDrawing: false,
@@ -91,8 +90,12 @@ navigator.mediaDevices
     start.addEventListener("click", () => {
       audio.play();
       mediaRecorder.start();
+      start.classList.add("recording");
+      
     });
     stop.addEventListener("click", () => {
+      start.classList.remove("recording");
+      stop.classList.add("play")
       mediaRecorder.stop();
     });
     mediaRecorder.ondataavailable = function (e) {
