@@ -17,6 +17,7 @@ let stop = document.getElementById("btnStop");
 let audio = document.querySelector("audio");
 let playAudio = document.getElementById("audioPlay");
 audio.controls = false;
+playAudio.controls = false;
 
 const helper = {
   isDrawing: false,
