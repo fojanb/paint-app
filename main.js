@@ -23,7 +23,7 @@ const helper = {
   index: -1, //It means that savePath is empty for now.
   popped: [], //Store the paths that are already out of savePath array.
   widthOffset: 700,
-  heightOffset: 100,
+  heightOffset: 150,
 };
 const audioHelper = {
   dataArray: [],
