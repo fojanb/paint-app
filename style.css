@@ -5,6 +5,7 @@ body {
   font-weight: bolder;
   background-color: #191c1f;
   margin: 0 auto;
+  padding-top: 18px;
 }
 /* .main {
   margin: 0 auto;
@@ -13,7 +14,7 @@ body {
 .board {
   background-color: rgb(0, 0, 0);
   margin-bottom: 5px;
-  border-bottom: 1px solid #e34b94;
+  border: 2px solid #2d6a4f;
   cursor: crosshair;
   margin-left: 600px;
 }
