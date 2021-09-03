@@ -32,10 +32,9 @@ button {
   padding: 5px;
   border-radius: 5px;
 }
-button:hover {
-  background-color: rgb(74, 46, 105);
-  color: aliceblue;
-}
+/* button:hover {
+  border-radius: 50%;
+} */
 .eraserBtn {
   font-weight: bolder;
   background-color: rgb(74, 46, 105);
