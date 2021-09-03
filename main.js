@@ -8,8 +8,13 @@ const backButton = document.querySelector("#btnBack");
 const eraserButton = document.querySelector("#btnEraser");
 const undoButton = document.querySelector("#btnUndo");
 const redoButton = document.querySelector("#btnRedo");
-const audio = document.querySelector("audio");
-
+// ---Audio---
+const audioCanvas = document.querySelector(".visualizer");
+const audioCanvasCtx = audioCanvas.getContext("2d");
+const record = document.querySelector(".record");
+const stop = document.querySelector(".stop");
+let audioCtx;
+stop.disabled = true;
 const helper = {
   isDrawing: false,
   SHAPE: "round",
@@ -72,49 +77,73 @@ const manageSaveBtn = () => {
 clearButton.addEventListener("click", clearCanvas, false);
 backButton.addEventListener("click", manageBackBtn);
 saveButton.addEventListener("click", manageSaveBtn);
-// >>>------------> Audio Section <------------<<<
+// >>>------------> Audio Room <------------<<<
 navigator.mediaDevices.getUserMedia(audioIN).then((stream) => {
   var mediaRecorder = new MediaRecorder(stream);
-console.log(mediaRecorder)
+  // console.log(mediaRecorder);
+  visualize(stream);
+  record.addEventListener("click", () => {
+    mediaRecorder.start();
+    console.log(mediaRecorder.state);
+    console.log("recorder started");
+    record.style.background = "red";
+    stop.disabled = false;
+    record.disabled = true;
+  });
+  stop.addEventListener("click", () => {
+    mediaRecorder.stop();
+    console.log(mediaRecorder.state);
+    console.log("recorder stopped");
+    record.style.background = "";
+    record.style.color = "";
+    // mediaRecorder.requestData();
+    stop.disabled = true;
+    record.disabled = false;
+  });
+  function visualize(stream) {
+    if (!audioCtx) {
+      audioCtx = new AudioContext();
+    }
+    console.log(audioCtx);
+    // createMediaStreamSource() function returns a MediaStreamAudioSourceNode :
+    const source = audioCtx.createMediaStreamSource(stream);
+    const analyser = audioCtx.createAnalyser();
+    analyser.fftSize = 2048;
+    const bufferLength = analyser.frequencyBinCount;
+    const dataArray = new Uint8Array(bufferLength);
+    source.connect(analyser);
+    // //analyser.connect(audioCtx.destination);
+    drawSignal();
+    function drawSignal() {
+      const WIDTH = audioCanvas.width;
+      const HEIGHT = audioCanvas.height;
+      // requestAnimationFrame(drawSignal);
+      analyser.getByteTimeDomainData(dataArray);
+      audioCtx.fillStyle = "rgb(200, 200, 200)";
+      audioCtx.fillRect(0, 0, WIDTH, HEIGHT);
+      audioCtx.lineWidth = 2;
+      audioCtx.strokeStyle = "rgb(0, 0, 0)";
+      audioCtx.beginPath();
+      let sliceWidth = (WIDTH * 1.0) / bufferLength;
+      let x = 0;
+      for (let i = 0; i < bufferLength; i++) {
+        let v = dataArray[i] / 128.0;
+        let y = (v * HEIGHT) / 2;
+        if (i === 0) {
+          audioCtx.moveTo(x, y);
+        } else {
+          audioCtx.lineTo(x, y);
+        }
+
+        x += sliceWidth;
+      }
+
+      audioCtx.lineTo(audioCanvas.width, audioCanvas.height / 2);
+      audioCtx.stroke();
+    }
+  }
 });
 
-
-// ------------------------------------------------
-// navigator.mediaDevices
-//   .getUserMedia(audioIN)
-//   .then((mediaStreamObj) => {
-//     let audio = document.querySelector("audio");
-//     if ("srcObject" in audio) {
-//       audio.srcObject = mediaStreamObj;
-//     } else {
-//       audio.src = window.URL.createObjectURL(mediaStreamObj);
-//     }
-//     audio.onloadedmetadata = function () {
-//       audio.play();
-//     };
-//     let start = document.getElementById("btnStart");
-//     let stop = document.getElementById("btnStop");
-//     let playAudio = document.getElementById("audioPlay");
-//     let mediaRecorder = new MediaRecorder(mediaStreamObj);
-//     start.addEventListener("click", () => {
-//       mediaRecorder.start();
-//     });
-//     stop.addEventListener("click", () => {
-//       mediaRecorder.stop();
-//     });
-//     mediaRecorder.ondataavailable = function (e) {
-//       audioHelper.dataArray.push(e.data);
-//     };
-//     mediaRecorder.onstop = function () {
-//       let audioData = new Blob(audioHelper.dataArray, { type: "audio/mp3;" });
-//       audioHelper.dataArray = [];
-//       let audioSrc = window.URL.createObjectURL(audioData);
-//       playAudio.src = audioSrc;
-//     };
-//   })
-//   .catch((err) => {
-//     console.log(err.name, err.message);
-//   });
 // >>>------------> Width Scale <------------<<<
 widthScale.addEventListener("change", () => {
   ctx.lineWidth = widthScale.value;
