@@ -12,6 +12,8 @@ const redoButton = document.querySelector("#btnRedo");
 let start = document.getElementById("btnStart");
 let stop = document.getElementById("btnStop");
 let audio = document.querySelector("audio");
+audio.controls = false;
+
 let playAudio = document.getElementById("audioPlay");
 
 const helper = {
