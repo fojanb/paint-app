@@ -37,3 +37,9 @@ button:hover {
   font-weight: bolder;
   background-color: rgb(74, 46, 105);
 }
+.recording{
+  background-color: rgb(136, 19, 19);
+}
+.play{
+  background-color: rgb(12, 94, 48);
+}
