@@ -3,7 +3,8 @@ body {
   color: aliceblue;
   font-family: monospace;
   font-weight: bolder;
-  background-color: #212529;
+  background-color: #191c1f;
+  margin: 0 auto;
 }
 /* .main {
   margin: 0 auto;
