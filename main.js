@@ -85,9 +85,7 @@ navigator.mediaDevices
     } else {
       audio.src = window.URL.createObjectURL(mediaStreamObj);
     }
-
     let mediaRecorder = new MediaRecorder(mediaStreamObj);
-
     start.addEventListener("click", () => {
       audio.play();
       mediaRecorder.start();
@@ -95,7 +93,6 @@ navigator.mediaDevices
     stop.addEventListener("click", () => {
       mediaRecorder.stop();
     });
-
     mediaRecorder.ondataavailable = function (e) {
       audioHelper.dataArray.push(e.data);
       // console.log(audioHelper.dataArray) this is a [Blob]
