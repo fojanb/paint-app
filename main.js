@@ -22,14 +22,15 @@ const helper = {
   savePath: [],
   index: -1, //It means that savePath is empty for now.
   popped: [], //Store the paths that are already out of savePath array.
-  offset: 80,
+  widthOffset: 700,
+  heightOffset: 100,
 };
 const audioHelper = {
   dataArray: [],
 };
 let audioIN = { audio: true };
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight - helper.offset;
+canvas.width = window.innerWidth - helper.widthOffset;
+canvas.height = window.innerHeight - helper.heightOffset;
 ctx.lineCap = helper.SHAPE;
 ctx.lineJoin = helper.SHAPE;
 canvas.style.cursor = helper.CURSOR;
@@ -39,7 +40,7 @@ ctx.lineWidth = widthScale.value;
 const startDrawing = (e) => {
   helper.isDrawing = !helper.isDrawing;
   ctx.beginPath();
-  ctx.moveTo(e.clientX, e.clientY);
+  ctx.moveTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
 };
 const endDrawing = (e) => {
   helper.isDrawing = !helper.isDrawing;
@@ -48,7 +49,7 @@ const endDrawing = (e) => {
 };
 const draw = (e) => {
   if (!helper.isDrawing) return;
-  ctx.lineTo(e.clientX, e.clientY);
+  ctx.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
   ctx.stroke();
 };
 const enterCanvas = (e) => {
@@ -91,11 +92,10 @@ navigator.mediaDevices
       audio.play();
       mediaRecorder.start();
       start.classList.add("recording");
-      
     });
     stop.addEventListener("click", () => {
       start.classList.remove("recording");
-      stop.classList.add("play")
+      stop.classList.add("play");
       mediaRecorder.stop();
     });
     mediaRecorder.ondataavailable = function (e) {
@@ -107,7 +107,6 @@ navigator.mediaDevices
       // audioHelper.dataArray = [];
       let audioSrc = window.URL.createObjectURL(audioData);
       playAudio.src = audioSrc;
-      
     };
   })
   .catch((err) => {
