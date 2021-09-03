@@ -99,7 +99,7 @@ navigator.mediaDevices
     };
     mediaRecorder.onstop = function () {
       let audioData = new Blob(audioHelper.dataArray, { type: "audio/mp3;" });
-      audioHelper.dataArray = [];
+      // audioHelper.dataArray = [];
       let audioSrc = window.URL.createObjectURL(audioData);
       playAudio.src = audioSrc;
       
