@@ -8,16 +8,14 @@ const backButton = document.querySelector("#btnBack");
 const eraserButton = document.querySelector("#btnEraser");
 const undoButton = document.querySelector("#btnUndo");
 const redoButton = document.querySelector("#btnRedo");
-// Audio
+// <<---Audio--->>
 const signalCanvas = document.querySelector(".visualizer");
 const signalCanvasCtx = signalCanvas.getContext("2d");
-
 let start = document.getElementById("btnStart");
 let stop = document.getElementById("btnStop");
 let audio = document.querySelector("audio");
 let playAudio = document.getElementById("audioPlay");
 audio.controls = false;
-
 const helper = {
   isDrawing: false,
   SHAPE: "round",
@@ -140,21 +138,17 @@ function visualizer(mediaStreamObj) {
     let sliceWidth = WIDTH * 1.0 / bufferLength;
     let x = 0;
     for(let i = 0; i < bufferLength; i++) {
-
       let v = dataArray[i] / 128.0;
       let y = v * HEIGHT/2;
-
       if(i === 0) {
         signalCanvasCtx.moveTo(x, y);
       } else {
         signalCanvasCtx.lineTo(x, y);
       }
-
       x += sliceWidth;
     }
     signalCanvasCtx.lineTo(signalCanvas.width, signalCanvas.height/2);
     signalCanvasCtx.stroke();
-
   }
 }
 // >>>------------> Width Scale <------------<<<
