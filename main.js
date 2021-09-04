@@ -9,7 +9,6 @@ const artRoom = {
   undoButton: document.querySelector("#btnUndo"),
   redoButton: document.querySelector("#btnRedo"),
 };
-const ctx = artRoom.canvas.getContext("2d");
 const audioRoom = {
   signalCanvas: document.querySelector(".visualizer"),
   start: document.getElementById("btnStart"),
@@ -18,6 +17,7 @@ const audioRoom = {
   playAudio: document.getElementById("audioPlay"),
 };
 audioRoom.audio.controls = false;
+const ctx = artRoom.canvas.getContext("2d");
 const signalCanvasCtx = audioRoom.signalCanvas.getContext("2d");
 let audioCtx;
 const audioHelper = {
