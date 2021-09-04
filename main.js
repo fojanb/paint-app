@@ -8,6 +8,22 @@ const backButton = document.querySelector("#btnBack");
 const eraserButton = document.querySelector("#btnEraser");
 const undoButton = document.querySelector("#btnUndo");
 const redoButton = document.querySelector("#btnRedo");
+// <<---Audio Room--->>
+const audioRoom = {
+  signalCanvas: document.querySelector(".visualizer"),
+  start: document.getElementById("btnStart"),
+  stop: document.getElementById("btnStop"),
+  audio: document.querySelector("audio"),
+  playAudio: document.getElementById("audioPlay"),
+};
+audioRoom.audio.controls = false;
+const signalCanvasCtx= audioRoom.signalCanvas.getContext("2d");
+let audioCtx;
+const audioHelper = {
+  chunk: [],
+};
+let audioIN = { audio: true };
+// ---------------->>
 const helper = {
   isDrawing: false,
   SHAPE: "round",
@@ -15,14 +31,11 @@ const helper = {
   savePath: [],
   index: -1, //It means that savePath is empty for now.
   popped: [], //Store the paths that are already out of savePath array.
-  offset: 80,
+  widthOffset: 700,
+  heightOffset: 150,
 };
-const audioHelper = {
-  dataArray: [],
-};
-let audioIN = { audio: true };
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight - helper.offset;
+canvas.width = window.innerWidth - helper.widthOffset;
+canvas.height = window.innerHeight - helper.heightOffset;
 ctx.lineCap = helper.SHAPE;
 ctx.lineJoin = helper.SHAPE;
 canvas.style.cursor = helper.CURSOR;
@@ -32,7 +45,7 @@ ctx.lineWidth = widthScale.value;
 const startDrawing = (e) => {
   helper.isDrawing = !helper.isDrawing;
   ctx.beginPath();
-  ctx.moveTo(e.clientX, e.clientY);
+  ctx.moveTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
 };
 const endDrawing = (e) => {
   helper.isDrawing = !helper.isDrawing;
@@ -41,7 +54,7 @@ const endDrawing = (e) => {
 };
 const draw = (e) => {
   if (!helper.isDrawing) return;
-  ctx.lineTo(e.clientX, e.clientY);
+  ctx.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
   ctx.stroke();
 };
 const enterCanvas = (e) => {
@@ -74,38 +87,72 @@ saveButton.addEventListener("click", manageSaveBtn);
 navigator.mediaDevices
   .getUserMedia(audioIN)
   .then((mediaStreamObj) => {
-    let audio = document.querySelector("audio");
-    if ("srcObject" in audio) {
-      audio.srcObject = mediaStreamObj;
+    if ("srcObject" in audioRoom.audio) {
+      audioRoom.audio.srcObject = mediaStreamObj;
     } else {
-      audio.src = window.URL.createObjectURL(mediaStreamObj);
+      audioRoom.audio.src = window.URL.createObjectURL(mediaStreamObj);
     }
-    audio.onloadedmetadata = function () {
-      audio.play();
-    };
-    let start = document.getElementById("btnStart");
-    let stop = document.getElementById("btnStop");
-    let playAudio = document.getElementById("audioPlay");
     let mediaRecorder = new MediaRecorder(mediaStreamObj);
-    start.addEventListener("click", () => {
+    audioRoom.start.addEventListener("click", () => {
       mediaRecorder.start();
+      audioRoom.start.classList.add("recording");
+      audioRoom.stop.classList.remove("play");
     });
-    stop.addEventListener("click", () => {
+    audioRoom.stop.addEventListener("click", () => {
+      audioRoom.start.classList.remove("recording");
+      audioRoom.stop.classList.add("play");
       mediaRecorder.stop();
     });
     mediaRecorder.ondataavailable = function (e) {
-      audioHelper.dataArray.push(e.data);
+      audioHelper.chunk.push(e.data);
+      // console.log(audioHelper.chunk) this is a [Blob]
     };
     mediaRecorder.onstop = function () {
-      let audioData = new Blob(audioHelper.dataArray, { type: "audio/mp3;" });
-      audioHelper.dataArray = [];
+      let audioData = new Blob(audioHelper.chunk, { type: "audio/mp3;" });
+      // audioHelper.chunk = [];
       let audioSrc = window.URL.createObjectURL(audioData);
-      playAudio.src = audioSrc;
+      audioRoom.playAudio.src = audioSrc;
     };
+    visualizer(mediaStreamObj);
   })
   .catch((err) => {
     console.log(err.name, err.message);
   });
+function visualizer(mediaStreamObj) {
+  audioCtx = new AudioContext();
+  const source = audioCtx.createMediaStreamSource(mediaStreamObj);
+  const analyser = audioCtx.createAnalyser();
+  analyser.fftSize = 2048;
+  const bufferLength = analyser.frequencyBinCount;
+  const dataArray = new Uint8Array(bufferLength);
+  source.connect(analyser);
+  draw();
+  function draw() {
+    const WIDTH = audioRoom.signalCanvas.width;
+    const HEIGHT = audioRoom.signalCanvas.height;
+    requestAnimationFrame(draw);
+    analyser.getByteTimeDomainData(dataArray);
+    signalCanvasCtx.fillStyle = "#343a40";
+    signalCanvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
+    signalCanvasCtx.lineWidth = 2;
+    signalCanvasCtx.strokeStyle = "#26e07f";
+    signalCanvasCtx.beginPath();
+    let sliceWidth = (WIDTH * 1.0) / bufferLength;
+    let x = 0;
+    for (let i = 0; i < bufferLength; i++) {
+      let v = dataArray[i] / 128.0;
+      let y = (v * HEIGHT) / 2;
+      if (i === 0) {
+        signalCanvasCtx.moveTo(x, y);
+      } else {
+        signalCanvasCtx.lineTo(x, y);
+      }
+      x += sliceWidth;
+    }
+    signalCanvasCtx.lineTo(audioRoom.signalCanvas.width, audioRoom.signalCanvas.height / 2);
+    signalCanvasCtx.stroke();
+  }
+}
 // >>>------------> Width Scale <------------<<<
 widthScale.addEventListener("change", () => {
   ctx.lineWidth = widthScale.value;
