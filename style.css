@@ -1,23 +1,26 @@
 body {
-  margin: 0;
+  display: grid;
   color: aliceblue;
   font-family: monospace;
   font-weight: bolder;
-  background-image: linear-gradient(to right, #080014 0%, #3d1472 100%);
+  background-color: #191c1f;
+  margin: 0 auto;
 }
-.main {
+#saveArea {
   margin: 0 auto;
   text-align: center;
 }
 .board {
-  background-image: linear-gradient(to right, #080014 0%, #3d1472 100%);
+  background-color: rgb(0, 0, 0);
   margin-bottom: 5px;
-  border-bottom: 2px solid rgb(74, 46, 105);
+  border: 2px solid #343a40;
   cursor: crosshair;
-  
+  margin-left: 600px;
 }
 table {
-  width: 100%;
+  width: 60%;
+  margin: 0 auto;
+  margin-right: 0px;
 }
 button {
   background: none;
@@ -29,11 +32,14 @@ button {
   padding: 5px;
   border-radius: 5px;
 }
-button:hover {
-  background-color: rgb(74, 46, 105);
-  color: aliceblue;
-}
+
 .eraserBtn {
   font-weight: bolder;
   background-color: rgb(74, 46, 105);
+}
+.recording {
+  background-color: rgb(136, 19, 19);
+}
+.play {
+  background-color: rgb(12, 94, 48);
 }
