@@ -17,6 +17,7 @@ const audioRoom = {
   playAudio: document.getElementById("audioPlay"),
 };
 audioRoom.audio.controls = false;
+audioRoom.signalCanvas.style.borderRadius = "5px";
 const ctx = artRoom.canvas.getContext("2d");
 const signalCanvasCtx = audioRoom.signalCanvas.getContext("2d");
 let audioCtx;
