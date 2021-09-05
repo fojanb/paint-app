@@ -1,6 +1,7 @@
 duration = document.querySelector("#duration");
 current = document.querySelector("#current");
 playPause = document.querySelector("#playPause");
+
 let timeCalcultor = (value) => {
   let second = Math.floor(value % 60);
   let minute = Math.floor(value / 60);
@@ -30,6 +31,7 @@ wavesurfer.on("ready", (e) => {
 wavesurfer.on("audioprocess", (e) => {
   current.textContent = timeCalcultor(wavesurfer.getCurrentTime(e));
 });
+
 // wavesurfer.on("play", (e) => {
 //   playPause.classList.remove("fa fa-play");
 //   playPause.classList.add("fa fa-pause");
