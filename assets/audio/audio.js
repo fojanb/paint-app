@@ -19,7 +19,8 @@ wavesurfer = WaveSurfer.create({
   scrollParent: false,
 });
 // Load audio
-wavesurfer.load("audio.mp3");
+let song = "audio.mp3";
+wavesurfer.load(song);
 playPause.addEventListener("click", (e) => {
   wavesurfer.playPause();
 });
