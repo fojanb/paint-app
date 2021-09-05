@@ -30,7 +30,6 @@ wavesurfer.on("ready", (e) => {
 wavesurfer.on("audioprocess", (e) => {
   current.textContent = timeCalcultor(wavesurfer.getCurrentTime(e));
 });
-
 // wavesurfer.on("play", (e) => {
 //   playPause.classList.remove("fa fa-play");
 //   playPause.classList.add("fa fa-pause");
