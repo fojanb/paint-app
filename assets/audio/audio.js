@@ -13,7 +13,7 @@ let timeCalcultor = (value) => {
 wavesurfer = WaveSurfer.create({
   container: "#wave",
   waveColor: "#cdedff",
-  progressColor: "#2FC4FF",
+  progressColor: "#1AAFFF",
   height: 48,
   backend: "MediaElement",
   scrollParent: false,
@@ -23,10 +23,14 @@ wavesurfer.load("audio.mp3");
 playPause.addEventListener("click", (e) => {
   wavesurfer.playPause();
 });
-wavesurfer.on("ready",(e)=>{
-    duration.textContent = timeCalcultor(wavesurfer.getDuration(e));
-})
-wavesurfer.on("audioprocess",(e)=>{
-    current.textContent = timeCalcultor(wavesurfer.getCurrentTime(e));
-})
+wavesurfer.on("ready", (e) => {
+  duration.textContent = timeCalcultor(wavesurfer.getDuration(e));
+});
+wavesurfer.on("audioprocess", (e) => {
+  current.textContent = timeCalcultor(wavesurfer.getCurrentTime(e));
+});
 
+wavesurfer.on("play", (e) => {
+  playPause.classList.remove("fa fa-play");
+  playPause.classList.add("fa fa-pause");
+});
