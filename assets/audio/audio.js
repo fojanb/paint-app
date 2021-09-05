@@ -26,3 +26,7 @@ playPause.addEventListener("click", (e) => {
 wavesurfer.on("ready",(e)=>{
     duration.textContent = timeCalcultor(wavesurfer.getDuration(e));
 })
+wavesurfer.on("audioprocess",(e)=>{
+    current.textContent = timeCalcultor(wavesurfer.getCurrentTime(e));
+})
+
