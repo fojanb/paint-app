@@ -14,12 +14,14 @@ let timeCalcultor = (value) => {
 };
 // Prepare wavesurfer object
 wavesurfer = WaveSurfer.create({
+  audioContext	:{},
   container: "#wave",
   waveColor: "#cdedff",
   progressColor: "#1AAFFF",
   height: 48,
   backend: "MediaElement",
   scrollParent: false,
+ 
 });
 // Load audio
 wavesurfer.load(audioPlayer.song, 11625);
