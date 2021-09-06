@@ -14,17 +14,20 @@ let timeCalcultor = (value) => {
 };
 // Prepare wavesurfer object
 wavesurfer = WaveSurfer.create({
-  audioContext	:{},
+  audioContext: {},
   container: "#wave",
   waveColor: "#cdedff",
   progressColor: "#1AAFFF",
   height: 48,
   backend: "MediaElement",
   scrollParent: false,
- 
 });
+let peaks = [];
+for (let i = 0; i < 100; i++) {
+  peaks.push(Math.random());
+}
 // Load audio
-wavesurfer.load(audioPlayer.song, 11625);
+wavesurfer.load(audioPlayer.song, peaks);
 audioPlayer.playPause.addEventListener("click", (e) => {
   wavesurfer.playPause();
 });
