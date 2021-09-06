@@ -1,7 +1,9 @@
-duration = document.querySelector("#duration");
-current = document.querySelector("#current");
-playPause = document.querySelector("#playPause");
-
+const audioPlayer = {
+  duration: document.querySelector("#duration"),
+  current: document.querySelector("#current"),
+  playPause: document.querySelector("#playPause"),
+  song: "audio.mp3",
+};
 let timeCalcultor = (value) => {
   let second = Math.floor(value % 60);
   let minute = Math.floor(value / 60);
@@ -20,16 +22,15 @@ wavesurfer = WaveSurfer.create({
   scrollParent: false,
 });
 // Load audio
-let song = "audio.mp3";
-wavesurfer.load(song,11625);
-playPause.addEventListener("click", (e) => {
+wavesurfer.load(audioPlayer.song, 11625);
+audioPlayer.playPause.addEventListener("click", (e) => {
   wavesurfer.playPause();
 });
 wavesurfer.on("ready", (e) => {
-  duration.textContent = timeCalcultor(wavesurfer.getDuration(e));
+  audioPlayer.duration.textContent = timeCalcultor(wavesurfer.getDuration(e));
 });
 wavesurfer.on("audioprocess", (e) => {
-  current.textContent = timeCalcultor(wavesurfer.getCurrentTime(e));
+  audioPlayer.current.textContent = timeCalcultor(wavesurfer.getCurrentTime(e));
 });
 
 // wavesurfer.on("play", (e) => {
