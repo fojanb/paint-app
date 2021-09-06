@@ -3,6 +3,7 @@ const audioPlayer = {
   current: document.querySelector("#current"),
   playPause: document.querySelector("#playPause"),
   song: "audio.mp3",
+  peaks: [],
 };
 let timeCalcultor = (value) => {
   let second = Math.floor(value % 60);
@@ -22,12 +23,11 @@ wavesurfer = WaveSurfer.create({
   backend: "MediaElement",
   scrollParent: false,
 });
-let peaks = [];
 for (let i = 0; i < 100; i++) {
-  peaks.push(Math.random());
+  audioPlayer.peaks.push(Math.random());
 }
 // Load audio
-wavesurfer.load(audioPlayer.song, peaks);
+wavesurfer.load(audioPlayer.song, audioPlayer.peaks);
 audioPlayer.playPause.addEventListener("click", (e) => {
   wavesurfer.playPause();
 });
