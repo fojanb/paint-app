@@ -17,14 +17,13 @@ let timeCalcultor = (value) => {
 wavesurfer = WaveSurfer.create({
   audioContext: {},
   container: "#wave",
-  waveColor: "#cdedff",
-  progressColor: "#1AAFFF",
+  waveColor: "#ffcad4",
+  progressColor: "#ef233c",
   height: 48,
   backend: "MediaElement",
   scrollParent: false,
   barWidth : 2,
   barMinHeight :1,
-  backgroundColor :	"gray",
 });
 for (let i = 0; i < 100; i++) {
   audioPlayer.peaks.push(Math.random());
