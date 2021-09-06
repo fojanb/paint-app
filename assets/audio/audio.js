@@ -22,6 +22,7 @@ wavesurfer = WaveSurfer.create({
   height: 48,
   backend: "MediaElement",
   scrollParent: false,
+  barWidth : 2,
 });
 for (let i = 0; i < 100; i++) {
   audioPlayer.peaks.push(Math.random());
