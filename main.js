@@ -94,7 +94,6 @@ navigator.mediaDevices
       mediaRecorder.start();
       start.classList.add("recording");
       stop.classList.remove("play");
-
     });
     stop.addEventListener("click", () => {
       start.classList.remove("recording");
@@ -130,24 +129,24 @@ function visualizer(mediaStreamObj) {
     const HEIGHT = signalCanvas.height;
     requestAnimationFrame(draw);
     analyser.getByteTimeDomainData(dataArray);
-    signalCanvasCtx.fillStyle = '#343a40';
+    signalCanvasCtx.fillStyle = "#343a40";
     signalCanvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
     signalCanvasCtx.lineWidth = 2;
-    signalCanvasCtx.strokeStyle = '#26e07f';
+    signalCanvasCtx.strokeStyle = "#26e07f";
     signalCanvasCtx.beginPath();
-    let sliceWidth = WIDTH * 1.0 / bufferLength;
+    let sliceWidth = (WIDTH * 1.0) / bufferLength;
     let x = 0;
-    for(let i = 0; i < bufferLength; i++) {
+    for (let i = 0; i < bufferLength; i++) {
       let v = dataArray[i] / 128.0;
-      let y = v * HEIGHT/2;
-      if(i === 0) {
+      let y = (v * HEIGHT) / 2;
+      if (i === 0) {
         signalCanvasCtx.moveTo(x, y);
       } else {
         signalCanvasCtx.lineTo(x, y);
       }
       x += sliceWidth;
     }
-    signalCanvasCtx.lineTo(signalCanvas.width, signalCanvas.height/2);
+    signalCanvasCtx.lineTo(signalCanvas.width, signalCanvas.height / 2);
     signalCanvasCtx.stroke();
   }
 }
