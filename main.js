@@ -9,13 +9,6 @@ const eraserButton = document.querySelector("#btnEraser");
 const undoButton = document.querySelector("#btnUndo");
 const redoButton = document.querySelector("#btnRedo");
 // <<---Audio--->>
-const signalCanvas = document.querySelector(".visualizer");
-const signalCanvasCtx = signalCanvas.getContext("2d");
-let start = document.getElementById("btnStart");
-let stop = document.getElementById("btnStop");
-let audio = document.querySelector("audio");
-let playAudio = document.getElementById("audioPlay");
-audio.controls = false;
 const helper = {
   isDrawing: false,
   SHAPE: "round",
@@ -26,11 +19,6 @@ const helper = {
   widthOffset: 700,
   heightOffset: 150,
 };
-let audioCtx;
-const audioHelper = {
-  chunk: [],
-};
-let audioIN = { audio: true };
 canvas.width = window.innerWidth - helper.widthOffset;
 canvas.height = window.innerHeight - helper.heightOffset;
 ctx.lineCap = helper.SHAPE;
@@ -81,75 +69,75 @@ clearButton.addEventListener("click", clearCanvas, false);
 backButton.addEventListener("click", manageBackBtn);
 saveButton.addEventListener("click", manageSaveBtn);
 // >>>------------> Audio Section <------------<<<
-navigator.mediaDevices
-  .getUserMedia(audioIN)
-  .then((mediaStreamObj) => {
-    if ("srcObject" in audio) {
-      audio.srcObject = mediaStreamObj;
-    } else {
-      audio.src = window.URL.createObjectURL(mediaStreamObj);
-    }
-    let mediaRecorder = new MediaRecorder(mediaStreamObj);
-    start.addEventListener("click", () => {
-      mediaRecorder.start();
-      start.classList.add("recording");
-      stop.classList.remove("play");
-    });
-    stop.addEventListener("click", () => {
-      start.classList.remove("recording");
-      stop.classList.add("play");
-      mediaRecorder.stop();
-    });
-    mediaRecorder.ondataavailable = function (e) {
-      audioHelper.chunk.push(e.data);
-      // console.log(audioHelper.chunk) this is a [Blob]
-    };
-    mediaRecorder.onstop = function () {
-      let audioData = new Blob(audioHelper.chunk, { type: "audio/mp3;" });
-      // audioHelper.chunk = [];
-      let audioSrc = window.URL.createObjectURL(audioData);
-      playAudio.src = audioSrc;
-    };
-    visualizer(mediaStreamObj);
-  })
-  .catch((err) => {
-    console.log(err.name, err.message);
-  });
-function visualizer(mediaStreamObj) {
-  audioCtx = new AudioContext();
-  const source = audioCtx.createMediaStreamSource(mediaStreamObj);
-  const analyser = audioCtx.createAnalyser();
-  analyser.fftSize = 2048;
-  const bufferLength = analyser.frequencyBinCount;
-  const dataArray = new Uint8Array(bufferLength);
-  source.connect(analyser);
-  draw();
-  function draw() {
-    const WIDTH = signalCanvas.width;
-    const HEIGHT = signalCanvas.height;
-    requestAnimationFrame(draw);
-    analyser.getByteTimeDomainData(dataArray);
-    signalCanvasCtx.fillStyle = "#343a40";
-    signalCanvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
-    signalCanvasCtx.lineWidth = 2;
-    signalCanvasCtx.strokeStyle = "#26e07f";
-    signalCanvasCtx.beginPath();
-    let sliceWidth = (WIDTH * 1.0) / bufferLength;
-    let x = 0;
-    for (let i = 0; i < bufferLength; i++) {
-      let v = dataArray[i] / 128.0;
-      let y = (v * HEIGHT) / 2;
-      if (i === 0) {
-        signalCanvasCtx.moveTo(x, y);
-      } else {
-        signalCanvasCtx.lineTo(x, y);
-      }
-      x += sliceWidth;
-    }
-    signalCanvasCtx.lineTo(signalCanvas.width, signalCanvas.height / 2);
-    signalCanvasCtx.stroke();
-  }
-}
+// navigator.mediaDevices
+//   .getUserMedia(audioIN)
+//   .then((mediaStreamObj) => {
+//     if ("srcObject" in audio) {
+//       audio.srcObject = mediaStreamObj;
+//     } else {
+//       audio.src = window.URL.createObjectURL(mediaStreamObj);
+//     }
+//     let mediaRecorder = new MediaRecorder(mediaStreamObj);
+//     start.addEventListener("click", () => {
+//       mediaRecorder.start();
+//       start.classList.add("recording");
+//       stop.classList.remove("play");
+//     });
+//     stop.addEventListener("click", () => {
+//       start.classList.remove("recording");
+//       stop.classList.add("play");
+//       mediaRecorder.stop();
+//     });
+//     mediaRecorder.ondataavailable = function (e) {
+//       audioHelper.chunk.push(e.data);
+//       // console.log(e.data) this is a [Blob]
+//     };
+//     mediaRecorder.onstop = function () {
+//       let audioData = new Blob(audioHelper.chunk, { type: "audio/mp3;" });
+//       // audioHelper.chunk = [];
+//       let audioSrc = window.URL.createObjectURL(audioData);
+//       playAudio.src = audioSrc;
+//     };
+//     visualizer(mediaStreamObj);
+//   })
+//   .catch((err) => {
+//     console.log(err.name, err.message);
+//   });
+// function visualizer(mediaStreamObj) {
+//   audioCtx = new AudioContext();
+//   const source = audioCtx.createMediaStreamSource(mediaStreamObj);
+//   const analyser = audioCtx.createAnalyser();
+//   analyser.fftSize = 2048;
+//   const bufferLength = analyser.frequencyBinCount;
+//   const dataArray = new Uint8Array(bufferLength);
+//   source.connect(analyser);
+//   draw();
+//   function draw() {
+//     const WIDTH = signalCanvas.width;
+//     const HEIGHT = signalCanvas.height;
+//     requestAnimationFrame(draw);
+//     analyser.getByteTimeDomainData(dataArray);
+//     signalCanvasCtx.fillStyle = "#343a40";
+//     signalCanvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
+//     signalCanvasCtx.lineWidth = 2;
+//     signalCanvasCtx.strokeStyle = "#26e07f";
+//     signalCanvasCtx.beginPath();
+//     let sliceWidth = (WIDTH * 1.0) / bufferLength;
+//     let x = 0;
+//     for (let i = 0; i < bufferLength; i++) {
+//       let v = dataArray[i] / 128.0;
+//       let y = (v * HEIGHT) / 2;
+//       if (i === 0) {
+//         signalCanvasCtx.moveTo(x, y);
+//       } else {
+//         signalCanvasCtx.lineTo(x, y);
+//       }
+//       x += sliceWidth;
+//     }
+//     signalCanvasCtx.lineTo(signalCanvas.width, signalCanvas.height / 2);
+//     signalCanvasCtx.stroke();
+//   }
+// }
 // >>>------------> Width Scale <------------<<<
 widthScale.addEventListener("change", () => {
   ctx.lineWidth = widthScale.value;
