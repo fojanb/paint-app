@@ -16,7 +16,6 @@ body {
   border: 2px solid #343a40;
   cursor: crosshair;
   margin-left: 600px;
-  border-radius: 8px;
 }
 table {
   width: 60%;
@@ -33,14 +32,50 @@ button {
   padding: 5px;
   border-radius: 5px;
 }
-
 .eraserBtn {
   font-weight: bolder;
   background-color: rgb(74, 46, 105);
 }
-.recording {
-  background-color: rgb(136, 19, 19);
+/* --AUDIO ROOM-- */
+
+.player {
+  display: grid;
+  grid-template-columns: 53rem 1fr;
+  width: 40rem;
+  border-radius: 0.5rem;
 }
-.play {
-  background-color: rgb(12, 94, 48);
+.player .info {
+  padding: 1rem;
 }
+.player .detail {
+  display: grid;
+  grid-template-columns: 1fr 4rem;
+  margin-bottom: 1rem;
+}
+.player .title {
+  font-size: 1.5rem;
+  padding-bottom: 1rem;
+}
+.player .title .time {
+  font-size: 0.9rem;
+  color: #777;
+  margin-top: 0.25rem;
+}
+.player .control i {
+  width: 3.5rem;
+  height: 3.5rem;
+  display: grid;
+  place-content: center;
+  font-size: 1.25rem;
+  color: white;
+  background-color: #777;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 0rem #ffcad4;
+
+}
+.player .control i:hover {
+  box-shadow: 0 0 1.5rem #ffcad4;
+  font-size: 1.5rem;
+}
+
