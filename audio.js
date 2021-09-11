@@ -17,7 +17,7 @@ let timeCalcultor = (value) => {
 wavesurfer = WaveSurfer.create({
   audioContext: {},
   container: "#wave",
-  waveColor: "#a8dadc",
+  waveColor: "#d8f3dc",
   progressColor: "#06d6a0",
   height: 48,
   backend: "MediaElement",
