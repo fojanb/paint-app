@@ -115,46 +115,11 @@ navigator.mediaDevices
       let audioSrc = window.URL.createObjectURL(audioData);
       audioRoom.playAudio.src = audioSrc;
     };
-    visualizer(mediaStreamObj);
   })
   .catch((err) => {
     console.log(err.name, err.message);
   });
-function visualizer(mediaStreamObj) {
-  audioCtx = new AudioContext();
-  const source = audioCtx.createMediaStreamSource(mediaStreamObj);
-  const analyser = audioCtx.createAnalyser();
-  analyser.fftSize = 2048;
-  const bufferLength = analyser.frequencyBinCount;
-  const dataArray = new Uint8Array(bufferLength);
-  source.connect(analyser);
-  draw();
-  function draw() {
-    const WIDTH = audioRoom.signalCanvas.width;
-    const HEIGHT = audioRoom.signalCanvas.height;
-    requestAnimationFrame(draw);
-    analyser.getByteTimeDomainData(dataArray);
-    signalCanvasCtx.fillStyle = "#343a40";
-    signalCanvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
-    signalCanvasCtx.lineWidth = 2;
-    signalCanvasCtx.strokeStyle = "#26e07f";
-    signalCanvasCtx.beginPath();
-    let sliceWidth = (WIDTH * 1.0) / bufferLength;
-    let x = 0;
-    for (let i = 0; i < bufferLength; i++) {
-      let v = dataArray[i] / 128.0;
-      let y = (v * HEIGHT) / 2;
-      if (i === 0) {
-        signalCanvasCtx.moveTo(x, y);
-      } else {
-        signalCanvasCtx.lineTo(x, y);
-      }
-      x += sliceWidth;
-    }
-    signalCanvasCtx.lineTo(audioRoom.signalCanvas.width, audioRoom.signalCanvas.height / 2);
-    signalCanvasCtx.stroke();
-  }
-}
+// -----wave
 const audioPlayer = {
   duration: document.querySelector("#duration"),
   current: document.querySelector("#current"),
