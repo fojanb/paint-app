@@ -43,6 +43,7 @@ button {
   grid-template-columns: 53rem 1fr;
   width: 40rem;
   border-radius: 0.5rem;
+  background-color: rgb(65, 66, 66);
 }
 .player .info {
   padding: 1rem;
