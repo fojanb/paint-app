@@ -72,10 +72,13 @@ button {
   border-radius: 50%;
   cursor: pointer;
   box-shadow: 0 0 0rem #ffcad4;
-
 }
 .player .control i:hover {
   box-shadow: 0 0 1.5rem #ffcad4;
   font-size: 1.5rem;
 }
-
+#audioCanvas {
+  height: 50px;
+  width: 10px;
+  background-color: #191c1f;
+}
