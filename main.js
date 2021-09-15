@@ -119,7 +119,7 @@ navigator.mediaDevices
   .catch((err) => {
     console.log(err.name, err.message);
   });
-// -----wave
+// -----wavesurfer.js
 const audioPlayer = {
   duration: document.querySelector("#duration"),
   current: document.querySelector("#current"),
@@ -133,7 +133,7 @@ let timeCalcultor = (value) => {
   if (second < 10) {
     second = "0" + second;
   }
-  return minute + ":" + second;
+  return `${minute} : ${second}`;
 };
 // Prepare wavesurfer object
 wavesurfer = WaveSurfer.create({
