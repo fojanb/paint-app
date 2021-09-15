@@ -95,4 +95,10 @@ button {
 .audioBox button:hover{
   cursor: pointer;
 }
+.recording{
+  background-color: red;
+}
+.play{
+  background-color: seagreen;
+}
 
