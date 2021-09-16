@@ -25,8 +25,6 @@ const audioHelper = {
   chunk: [],
 };
 let audioIN = { audio: true };
-const ad = new AudioContext();
-console.log(ad.sampleRate)
 // ---------------->>
 const helper = {
   isDrawing: false,
@@ -143,11 +141,11 @@ wavesurfer = WaveSurfer.create({
   container: "#wave",
   waveColor: "#d8f3dc",
   progressColor: "#06d6a0",
-  height: 48,
+  height: 20,
   backend: "MediaElement",
   scrollParent: false,
-  barWidth : 2,
-  barMinHeight :1,
+  barWidth : 1,
+  barMinHeight :2,
 });
 for (let i = 0; i < 100; i++) {
   audioPlayer.peaks.push(Math.random());
