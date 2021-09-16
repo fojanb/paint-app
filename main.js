@@ -25,6 +25,8 @@ const audioHelper = {
   chunk: [],
 };
 let audioIN = { audio: true };
+const ad = new AudioContext();
+console.log(ad.sampleRate)
 // ---------------->>
 const helper = {
   isDrawing: false,
@@ -133,7 +135,7 @@ let timeCalcultor = (value) => {
   if (second < 10) {
     second = "0" + second;
   }
-  return `${minute} : ${second}`;
+  return `${minute}:${second}`;
 };
 // Prepare wavesurfer object
 wavesurfer = WaveSurfer.create({
