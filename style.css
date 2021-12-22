@@ -3,7 +3,7 @@ body {
   color: aliceblue;
   font-family: monospace;
   font-weight: bolder;
-  background-color: #191c1f;
+  background-color: #2d333b;
   margin: 0 auto;
 }
 #saveArea {
@@ -11,7 +11,7 @@ body {
   text-align: center;
 }
 .board {
-  background-color: rgb(0, 0, 0);
+  background-color: #22272e;
   margin-bottom: 5px;
   border: 2px solid #343a40;
   cursor: crosshair;
@@ -21,6 +21,9 @@ table {
   width: 60%;
   margin: 0 auto;
   margin-right: 0px;
+}
+table h3{
+  color: #855c8f;
 }
 button {
   background: none;
