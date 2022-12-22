@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="./style.css" />
-    <title>Paint-app</title>
+    <title>Castofly</title>
   </head>
   <body>
     <div class="main">
@@ -16,7 +16,7 @@
             <label for="colorChange"><i class="fa fa-paint-brush" style="font-size: 24px"></i> </label>&nbsp;<input
               type="color"
               id="colorChange"
-              value="#277da1"
+              value="#00A6FF"
             />
           </td>
           <td>
@@ -38,7 +38,7 @@
               <button id="btnRedo"><i class="fa fa-rotate-right" style="font-size: 24px"></i></button>
             </p>
           </td>
-          <td><h3>Fojan Babaali</h3></td>
+          <td><img src="./assets/logo.png" width="60px" height="60px" /></td>
         </tr>
       </table>
       <canvas class="board"></canvas>
@@ -48,43 +48,27 @@
         <button id="btnBack">Back</button>
       </div>
       <div id="tools">
-        <!-- <table>
+        <table>
           <tr>
             <td>
-              <div class="player">
-                <div class="info">
-                  <div class="detail">
-                    <div class="title">
-                      <div class="time">
-                        <span id="current">0:00</span>
-                        <span>/</span>
-                        <span id="duration">0:00</span>
-                      </div>
-                    </div>
-                    <div class="control">
-                      <i class="fa fa-play" id="playPause"></i>
-                    </div>
-                  </div>
-                  <div id="wave"></div>
-                </div>
-              </div>
+              <p class="audioBtn">
+                <button id="btnStart">
+                  <i class="fa fa-microphone" style="font-size: 28px"></i>
+                </button>
+                <button id="btnStop">
+                  <i class="fa fa-stop" style="font-size: 20px"></i>
+                </button>
+              </p>
+            </td>
+            <td>
+              <canvas class="visualizer" height="50px" style="background-color: #343a40"></canvas>
+              <audio controls></audio>
+              <audio id="audioPlay" controls></audio>
             </td>
           </tr>
-        </table> -->
-        <div class="audioBox">
-          <button id="btnStart">
-            <i class="fa fa-microphone" style="font-size: 28px"></i>
-          </button>
-          <button id="btnStop">
-            <i class="fa fa-stop" style="font-size: 20px"></i>
-          </button>
-          <canvas class="visualizer" id="audioCanvas"></canvas>
-          <audio controls></audio>
-          <audio id="audioPlay" controls></audio>
-        </div>
+        </table>
       </div>
     </div>
-    <script src="https://unpkg.com/wavesurfer.js@5.2.0/dist/wavesurfer.js"></script>
     <script src="main.js"></script>
   </body>
 </html>

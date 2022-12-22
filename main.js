@@ -17,7 +17,6 @@ const audioRoom = {
   playAudio: document.getElementById("audioPlay"),
 };
 audioRoom.audio.controls = false;
-audioRoom.signalCanvas.style.borderRadius = "5px";
 const ctx = artRoom.canvas.getContext("2d");
 const signalCanvasCtx = audioRoom.signalCanvas.getContext("2d");
 let audioCtx;
@@ -31,8 +30,8 @@ const helper = {
   SHAPE: "round",
   CURSOR: "crosshair",
   savePath: [],
-  index: -1, //It means that savePath is empty for now.
-  popped: [], //Store the paths that are already out of savePath array.
+  index: -1, 
+  popped: [], 
   widthOffset: 700,
   heightOffset: 150,
 };
@@ -69,7 +68,7 @@ artRoom.canvas.addEventListener("mouseover", enterCanvas);
 // ------------------------------------------------
 const clearCanvas = () => {
   ctx.clearRect(0, 0, artRoom.canvas.width, artRoom.canvas.height);
-  ctx.beginPath(); // clear existing drawing paths
+  ctx.beginPath();
   helper.savePath = [];
   helper.index = -1;
 };
@@ -107,73 +106,64 @@ navigator.mediaDevices
     });
     mediaRecorder.ondataavailable = function (e) {
       audioHelper.chunk.push(e.data);
-      // console.log(audioHelper.chunk) this is a [Blob]
     };
     mediaRecorder.onstop = function () {
       let audioData = new Blob(audioHelper.chunk, { type: "audio/mp3;" });
-      // audioHelper.chunk = [];
       let audioSrc = window.URL.createObjectURL(audioData);
       audioRoom.playAudio.src = audioSrc;
     };
+    visualizer(mediaStreamObj);
   })
   .catch((err) => {
     console.log(err.name, err.message);
   });
-// -----wavesurfer.js
-const audioPlayer = {
-  duration: document.querySelector("#duration"),
-  current: document.querySelector("#current"),
-  playPause: document.querySelector("#playPause"),
-  song: "audio.mp3",
-  peaks: [],
-};
-let timeCalcultor = (value) => {
-  let second = Math.floor(value % 60);
-  let minute = Math.floor(value / 60);
-  if (second < 10) {
-    second = "0" + second;
+function visualizer(mediaStreamObj) {
+  audioCtx = new AudioContext();
+  const source = audioCtx.createMediaStreamSource(mediaStreamObj);
+  const analyser = audioCtx.createAnalyser();
+  analyser.fftSize = 2048;
+  const bufferLength = analyser.frequencyBinCount;
+  const dataArray = new Uint8Array(bufferLength);
+  source.connect(analyser);
+  draw();
+  function draw() {
+    const WIDTH = audioRoom.signalCanvas.width;
+    const HEIGHT = audioRoom.signalCanvas.height;
+    requestAnimationFrame(draw);
+    analyser.getByteTimeDomainData(dataArray);
+    signalCanvasCtx.fillStyle = "#343a40";
+    signalCanvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
+    signalCanvasCtx.lineWidth = 2;
+    signalCanvasCtx.strokeStyle = "#26e07f";
+    signalCanvasCtx.beginPath();
+    let sliceWidth = (WIDTH * 1.0) / bufferLength;
+    let x = 0;
+    for (let i = 0; i < bufferLength; i++) {
+      let v = dataArray[i] / 128.0;
+      let y = (v * HEIGHT) / 2;
+      if (i === 0) {
+        signalCanvasCtx.moveTo(x, y);
+      } else {
+        signalCanvasCtx.lineTo(x, y);
+      }
+      x += sliceWidth;
+    }
+    signalCanvasCtx.lineTo(audioRoom.signalCanvas.width, audioRoom.signalCanvas.height / 2);
+    signalCanvasCtx.stroke();
   }
-  return `${minute}:${second}`;
-};
-// Prepare wavesurfer object
-wavesurfer = WaveSurfer.create({
-  audioContext: {},
-  container: "#wave",
-  waveColor: "#d8f3dc",
-  progressColor: "#06d6a0",
-  height: 20,
-  backend: "MediaElement",
-  scrollParent: false,
-  barWidth : 1,
-  barMinHeight :2,
-});
-for (let i = 0; i < 100; i++) {
-  audioPlayer.peaks.push(Math.random());
 }
-// Load audio
-wavesurfer.load(audioPlayer.song, audioPlayer.peaks);
-audioPlayer.playPause.addEventListener("click", (e) => {
-  wavesurfer.playPause();
-});
-wavesurfer.on("ready", (e) => {
-  audioPlayer.duration.textContent = timeCalcultor(wavesurfer.getDuration(e));
-});
-wavesurfer.on("audioprocess", (e) => {
-  audioPlayer.current.textContent = timeCalcultor(wavesurfer.getCurrentTime(e));
-});
 // >>>------------> Width Scale <------------<<<
 artRoom.widthScale.addEventListener("change", () => {
   ctx.lineWidth = artRoom.widthScale.value;
-  ctx.beginPath(); // clear existing drawing paths
+  ctx.beginPath();
 });
 // >>>------------> Color Palette <------------<<<
 artRoom.colorPalette.addEventListener("change", () => {
   ctx.strokeStyle = artRoom.colorPalette.value;
   ctx.globalCompositeOperation = "source-over";
-  ctx.beginPath(); // clear existing drawing paths
+  ctx.beginPath();
 });
 // >>>------------> Erase Button <------------<<<
-/*Pixel-based eraser (Recommended solution : globalCompositeOperation)*/
 const erase = () => (ctx.globalCompositeOperation = "destination-out");
 artRoom.eraserButton.addEventListener("click", erase);
 // >>>------------> Undo Button <------------<<<

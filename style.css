@@ -3,7 +3,7 @@ body {
   color: aliceblue;
   font-family: monospace;
   font-weight: bolder;
-  background-color: #2d333b;
+  background-color: #191c1f;
   margin: 0 auto;
 }
 #saveArea {
@@ -11,7 +11,7 @@ body {
   text-align: center;
 }
 .board {
-  background-color: #22272e;
+  background-color: rgb(0, 0, 0);
   margin-bottom: 5px;
   border: 2px solid #343a40;
   cursor: crosshair;
@@ -21,9 +21,6 @@ table {
   width: 60%;
   margin: 0 auto;
   margin-right: 0px;
-}
-table h3{
-  color: #855c8f;
 }
 button {
   background: none;
@@ -35,76 +32,14 @@ button {
   padding: 5px;
   border-radius: 5px;
 }
+
 .eraserBtn {
   font-weight: bolder;
   background-color: rgb(74, 46, 105);
 }
-/* --AUDIO ROOM-- */
-
-.player {
-  display: grid;
-  grid-template-columns: 53rem 1fr;
-  width: 40rem;
-  border-radius: 0.5rem;
+.recording {
+  background-color: rgb(136, 19, 19);
 }
-.player .info {
-  padding: 1rem;
+.play {
+  background-color: rgb(12, 94, 48);
 }
-.player .detail {
-  display: grid;
-  grid-template-columns: 1fr 4rem;
-  margin-bottom: 1rem;
-}
-.player .title {
-  font-size: 1.5rem;
-  padding-bottom: 1rem;
-}
-.player .title .time {
-  font-size: 0.9rem;
-  color: #777;
-  margin-top: 0.25rem;
-}
-.player .control i {
-  width: 3.5rem;
-  height: 3.5rem;
-  display: grid;
-  place-content: center;
-  font-size: 1.25rem;
-  color: white;
-  background-color: #777;
-  border-radius: 50%;
-  cursor: pointer;
-  box-shadow: 0 0 0rem #ffcad4;
-}
-.player .control i:hover {
-  box-shadow: 0 0 1.5rem #ffcad4;
-  font-size: 1.5rem;
-}
-#audioCanvas {
-  height: 50px;
-  width: 10px;
-  background-color: #191c1f;
-}
-.audioBox{
-  display: none;
-  flex-direction: row;
-  border: 2px solid #343a40;
-  width : 400px;
-  padding: 10px;
-  position: relative;
-  bottom: 80px;
-  left: 100px;
-}
-.audioBox button{
-  cursor: pointer;
-}
-.audioBox button:hover{
-  cursor: pointer;
-}
-.recording{
-  background-color: red;
-}
-.play{
-  background-color: seagreen;
-}
-
